@@ -41,6 +41,16 @@ def point_other():
     return Point(0, 1, 0)
 
 
+@pytest.fixture
+def corrupt_input():
+    return (0, 1, None)
+
+
+def test__post_init__raises(corrupt_input):
+    with pytest.raises(ValueError):
+        Point(corrupt_input)
+
+
 def test__add__(point, point_other):
     assert point.__add__(point_other) == Point(1, 1, 0)
 
