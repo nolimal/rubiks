@@ -1,6 +1,8 @@
 import pytest
 from game.piece import Piece
 from constants import FACE
+from game.matrix import Matrix
+from game.point import Point
 
 
 def test_nothing():
@@ -9,7 +11,7 @@ def test_nothing():
 
 @pytest.fixture
 def position_face_r():
-    return (1, 0, 0)
+    return Point(1, 0, 0)
 
 
 @pytest.fixture
@@ -35,6 +37,14 @@ def test_set_piece_type(piece):
     assert piece.type == FACE
 
 
-def test_rotate(piece, position_face_r):
-    new = piece.rotate(position_face_r)
-    assert True
+@pytest.fixture
+def rotation_matrix():
+    return Matrix([0, 1, 0,
+                   -1, 0, 0,
+                   0, 0, 1])
+
+
+def test_rotate(piece, rotation_matrix):
+    piece.rotate(rotation_matrix)
+    assert piece.colors == [None, 'Red', None]
+    assert piece.position == Point(0, -1, 0)
