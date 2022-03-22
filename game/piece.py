@@ -27,3 +27,26 @@ class Piece:
             self.type = CORNER
         else:
             raise ValueError(f"Must have 1, 2, or 3 colors, given: {self.colors}")
+
+    def rotate(self, matrix):
+        """Rotation matrix multiplication for a single piece"""
+        before = self.position
+        self.position = matrix * self.position
+
+        # we need to swap the positions of two things in self.colors so colors appear
+        # on the correct faces. rot gives us the axes to swap between.
+        rot = self.position - before
+        if not any(rot):
+            return  # no change occurred
+        if rot.count(0) == 2:
+            rot += matrix * rot
+
+        assert rot.count(0) == 1, (
+            f"There is a bug in the Piece.rotate() method!"
+            f"\nbefore: {before}"
+            f"\nafter: {self.position}"
+            f"\nchanges: {rot}"
+        )
+
+        i, j = (i for i, x in enumerate(rot) if x != 0)
+        self.colors[i], self.colors[j] = self.colors[j], self.colors[i]
