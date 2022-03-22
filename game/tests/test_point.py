@@ -59,9 +59,24 @@ def test__sub__(point, point_other):
     assert point.__sub__(point_other) == Point(1, -1, 0)
 
 
+@pytest.fixture
+def fake_value():
+    return -1
+
+
+def test__mul__(point, fake_value):
+    assert point.__mul__(fake_value) == Point(-1, 0, 0)
+
+
 def test_dot(point, point_other):
     assert point.dot(point_other) == 0
 
 
 def test_cross(point, point_other):
     assert point.cross(point_other) == Point(0, 0, 1)
+
+
+def test_count(point, fake_value):
+    assert point.count(-1) == 0
+    assert point.count(0) == 2
+    assert point.count(1) == 1
