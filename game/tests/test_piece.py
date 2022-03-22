@@ -26,10 +26,15 @@ def test_class_piece_exists(piece):
     assert isinstance(piece, Piece)
 
 
+def test_str_(piece):
+    assert piece.__str__().__contains__(FACE)
+    assert piece.__str__().__contains__("Red")
+
+
 def test_set_piece_type(piece):
     assert piece.type == FACE
 
 
-def test_str_(piece):
-    assert piece.__str__().__contains__(FACE)
-    assert piece.__str__().__contains__("Red")
+def test_rotate(piece, position_face_r):
+    new = piece.rotate(position_face_r)
+    assert True
