@@ -1,5 +1,5 @@
 from game.point import Point
-from typing import Union, List, Tuple
+from typing import Union, List
 from dataclasses import dataclass
 
 
