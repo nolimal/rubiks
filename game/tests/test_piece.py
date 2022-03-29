@@ -46,7 +46,6 @@ def rotation_matrix():
 
 def test_rotate(piece, rotation_matrix):
     position_before = piece.position
-    colors_before = piece.colors
     piece.rotate(rotation_matrix)
     assert piece.colors == [None, 'Red', None]
     assert position_before != piece.position
