@@ -69,7 +69,6 @@ To apply `.R` rotation of the right face we must do the following:
 - Select `Pieces` with `position.x == 1`
 - Apply the rotation matrix to the selected `Pieces`.
 
-
 #### Layer based algorithm
 
 In implementation vocabulary we first solve
@@ -79,5 +78,9 @@ When the algorithm finishes, the `Solver.moves` shows the list representing solu
 
 ### References
 
-1. https://en.wikipedia.org/wiki/Rotation_matrix
+[1] Robert C. Martin: Clean Code: A Handbook of Agile Software Craftsmanship (2008) p. 122-133
+
+[2] Beginner Solution to the Rubik's Cube (2005) p. 1-7
+
+[3] Rotation matrix https://en.wikipedia.org/wiki/Rotation_matrix
 
