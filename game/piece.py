@@ -1,11 +1,12 @@
 from dataclasses import dataclass
-from typing import Tuple
+from typing import Tuple, Union
 from constants import FACE, EDGE, CORNER
+from game.point import Point
 
 
 @dataclass
 class Piece:
-    position: Tuple[int, int, int]
+    position: Union[Point, Tuple[int, int, int]]
     colors: Tuple
 
     def __str__(self):

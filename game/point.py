@@ -1,3 +1,4 @@
+from __future__ import annotations
 from typing import Tuple, Union, Optional
 from dataclasses import dataclass
 
@@ -10,7 +11,7 @@ class Point:
     z: Optional[int] = None
 
     def __post_init__(self):
-        if isinstance(self.x, tuple):
+        if isinstance(self.x, (tuple, Point)):
             t = self.x
             self.x = t[0]
             self.y = t[1]
