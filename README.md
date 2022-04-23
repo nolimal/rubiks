@@ -16,7 +16,7 @@ Define clockwise face rotations:
 
 `F - front, R - right, U - upper,`
 
-` L - left, B - bottom, D - down`
+` L - left, B - back, D - down`
 
 Clockwise slice rotations:
 
