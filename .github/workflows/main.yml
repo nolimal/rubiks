@@ -29,10 +29,11 @@ jobs:
           architecture: x64
           cache: 'pip'
       - name: Install dependencies
-        if: ${{ steps.filter.outputs.py_modified == 'true' }}
+        'if: ${{ steps.filter.outputs.py_modified == 'true' }}
         run: pip install -r requirements/requirements.txt
       - name: Run flake8
-        if: ${{ steps.filter.outputs.py_modified == 'true' }}
+        'if: ${{ steps.filter.outputs.py_modified == 'true' }}
         run: flake8 ${{ steps.filter.outputs.py_modified_files }}
       - name: Run pytest
+        'if: ${{ steps.filter.outputs.py_modified == 'true' }}
         run: pytest tests
