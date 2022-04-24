@@ -1371,3 +1371,113 @@ def test_Zi_rotation(expected_faces, expected_edges, expected_corners):
     assert cube.faces == expected_faces
     assert cube.edges == expected_edges
     assert cube.corners == expected_corners
+
+
+@pytest.mark.parametrize(
+    "move_str, expected_faces, expected_edges, expected_corners",
+    [(
+            "Zi R",
+            (Piece(position=Point(0, 1, 0), colors=[None, 'R', None]),
+             Piece(position=Point(0, -1, 0), colors=[None, 'L', None]),
+             Piece(position=Point(-1, 0, 0), colors=['U', None, None]),
+             Piece(position=Point(1, 0, 0), colors=['D', None, None]),
+             Piece(position=Point(0, 0, 1), colors=[None, None, 'F']),
+             Piece(position=Point(0, 0, -1), colors=[None, None, 'B']))
+            ,
+            (Piece(position=Point(-1, 1, 0), colors=['U', 'R', None]),
+             Piece(position=Point(1, 0, -1), colors=['D', None, 'R']),
+             Piece(position=Point(0, 1, 1), colors=[None, 'R', 'F']),
+             Piece(position=Point(0, 1, -1), colors=[None, 'R', 'B']),
+             Piece(position=Point(-1, -1, 0), colors=['U', 'L', None]),
+             Piece(position=Point(1, 0, 1), colors=['D', None, 'L']),
+             Piece(position=Point(0, -1, 1), colors=[None, 'L', 'F']),
+             Piece(position=Point(0, -1, -1), colors=[None, 'L', 'B']),
+             Piece(position=Point(-1, 0, 1), colors=['U', None, 'F']),
+             Piece(position=Point(-1, 0, -1), colors=['U', None, 'B']),
+             Piece(position=Point(1, 1, 0), colors=['D', 'F', None]),
+             Piece(position=Point(1, -1, 0), colors=['D', 'B', None]))
+            ,
+            (Piece(position=Point(-1, 1, 1), colors=['U', 'R', 'F']),
+             Piece(position=Point(-1, 1, -1), colors=['U', 'R', 'B']),
+             Piece(position=Point(1, 1, -1), colors=['D', 'F', 'R']),
+             Piece(position=Point(1, -1, -1), colors=['D', 'B', 'R']),
+             Piece(position=Point(-1, -1, 1), colors=['U', 'L', 'F']),
+             Piece(position=Point(-1, -1, -1), colors=['U', 'L', 'B']),
+             Piece(position=Point(1, 1, 1), colors=['D', 'F', 'L']),
+             Piece(position=Point(1, -1, 1), colors=['D', 'B', 'L']))
+    )]
+)
+def test_move_sequence_identical_to_separate_moves(move_str, expected_faces, expected_edges, expected_corners):
+    cube = Cube("UUU"
+                "UUU"
+                "UUU"
+                "LLLFFFRRRBBB"
+                "LLLFFFRRRBBB"
+                "LLLFFFRRRBBB"
+                "DDD"
+                "DDD"
+                "DDD")
+    cube_alternative = Cube("UUU"
+                            "UUU"
+                            "UUU"
+                            "LLLFFFRRRBBB"
+                            "LLLFFFRRRBBB"
+                            "LLLFFFRRRBBB"
+                            "DDD"
+                            "DDD"
+                            "DDD")
+    assert not cube.faces == expected_faces
+    assert not cube.edges == expected_edges
+    assert not cube.corners == expected_corners
+    assert not cube_alternative.faces == expected_faces
+    assert not cube_alternative.edges == expected_edges
+    assert not cube_alternative.corners == expected_corners
+    cube.sequence(move_str)
+    assert cube.faces == expected_faces
+    assert cube.edges == expected_edges
+    assert cube.corners == expected_corners
+    cube_alternative.Zi()
+    cube_alternative.R()
+    assert cube_alternative.faces == expected_faces
+    assert cube_alternative.edges == expected_edges
+    assert cube_alternative.corners == expected_corners
+
+
+@pytest.mark.parametrize(
+    "colors, expected_piece",
+    [(['R', 'U', 'F'], Piece(position=Point(1, 1, 1), colors=['R', 'U', 'F'])),
+     (['L', 'U', 'B'], Piece(position=Point(-1, 1, -1), colors=['L', 'U', 'B'])),
+     ([None, 'U', 'F'], None)]
+)
+def test_find_piece(colors, expected_piece):
+    cube = Cube("UUU"
+                "UUU"
+                "UUU"
+                "LLLFFFRRRBBB"
+                "LLLFFFRRRBBB"
+                "LLLFFFRRRBBB"
+                "DDD"
+                "DDD"
+                "DDD")
+    piece = cube.find_piece(*colors)
+    assert piece == expected_piece
+
+
+@pytest.mark.parametrize(
+    "x, y, z, expected_piece",
+    [(1, 1, 1, Piece(position=Point(1, 1, 1), colors=['R', 'U', 'F'])),
+     ((-1), 1, (-1), Piece(position=Point(-1, 1, -1), colors=['L', 'U', 'B'])),
+     (0, 1, 1, Piece(position=Point(0, 1, 1), colors=[None, 'U', 'F']))]
+)
+def test_get_piece(x, y, z, expected_piece):
+    cube = Cube("UUU"
+                "UUU"
+                "UUU"
+                "LLLFFFRRRBBB"
+                "LLLFFFRRRBBB"
+                "LLLFFFRRRBBB"
+                "DDD"
+                "DDD"
+                "DDD")
+    piece = cube.get_piece(x, y, z)
+    assert piece == expected_piece
