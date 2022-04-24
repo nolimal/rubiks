@@ -62,6 +62,10 @@ def test_str_(cube):
     assert isinstance(cube.__str__(), str)
 
 
+def test_flat_str(cube):
+    assert isinstance(cube.flat_str(), str)
+
+
 @pytest.fixture
 def rotation_matrix():
     return Matrix([0, 1, 0,
@@ -1517,3 +1521,96 @@ def test__ne__(cube1, cube2, expected, request):
     cube1 = request.getfixturevalue(cube1)
     cube2 = request.getfixturevalue(cube2)
     assert expected == cube1.__ne__(cube2)
+
+
+@pytest.mark.parametrize(
+    "cube1, expected_color",
+    [
+        ("cube", "B"),
+        ("solved_cube", "L")
+    ]
+)
+def test_left_color(cube1, expected_color, request):
+    cube1 = request.getfixturevalue(cube1)
+    assert expected_color == cube1.left_color()
+
+
+@pytest.mark.parametrize(
+    "cube1, expected_color",
+    [
+        ("cube", "F"),
+        ("solved_cube", "R")
+    ]
+)
+def test_right_color(cube1, expected_color, request):
+    cube1 = request.getfixturevalue(cube1)
+    assert expected_color == cube1.right_color()
+
+
+@pytest.mark.parametrize(
+    "cube1, expected_color",
+    [
+        ("cube", "R"),
+        ("solved_cube", "U")
+    ]
+)
+def test_up_color(cube1, expected_color, request):
+    cube1 = request.getfixturevalue(cube1)
+    assert expected_color == cube1.up_color()
+
+
+@pytest.mark.parametrize(
+    "cube1, expected_color",
+    [
+        ("cube", "U"),
+        ("solved_cube", "D")
+    ]
+)
+def test_down_color(cube1, expected_color, request):
+    cube1 = request.getfixturevalue(cube1)
+    assert expected_color == cube1.down_color()
+
+
+@pytest.mark.parametrize(
+    "cube1, expected_color",
+    [
+        ("cube", "U"),
+        ("solved_cube", "F")
+    ]
+)
+def test_front_color(cube1, expected_color, request):
+    cube1 = request.getfixturevalue(cube1)
+    assert expected_color == cube1.front_color()
+
+
+@pytest.mark.parametrize(
+    "cube1, expected_color",
+    [
+        ("cube", "D"),
+        ("solved_cube", "B")
+    ]
+)
+def test_back_color(cube1, expected_color, request):
+    cube1 = request.getfixturevalue(cube1)
+    assert expected_color == cube1.back_color()
+
+
+@pytest.mark.parametrize(
+    "cube1, expected_color",
+    [
+        ("cube",
+         ['D', 'L', 'U', 'R', 'R', 'D', 'F', 'F', 'U', 'B', 'B', 'L', 'D', 'D', 'R', 'B', 'R', 'B', 'L', 'D', 'L', 'R',
+          'B', 'F', 'R', 'U', 'U', 'L', 'F', 'B', ' ', 'D', 'D', 'U', 'F', 'B', 'R', 'B', 'B', 'R', 'F', 'U', 'D', 'F',
+          'L', 'U', 'D', 'L', 'U', 'U', 'L', 'F', 'L', 'F']
+         ),
+        ("solved_cube",
+         ['U', 'U', 'U', 'U', 'U', 'U', 'U', 'U', 'U', 'L', 'L', 'L', 'F', 'F', 'F', 'R', 'R', 'R', 'B', 'B', 'B', 'L',
+          'L', 'L', 'F', 'F', 'F', 'R', 'R', 'R', 'B', 'B', 'B', 'L', 'L', 'L', 'F', 'F', 'F', 'R', 'R', 'R', 'B', 'B',
+          'B', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D', 'D']
+         )
+    ]
+)
+def test__color_list(cube1, expected_color, request):
+    cube1 = request.getfixturevalue(cube1)
+    colors = cube1._color_list()
+    assert expected_color == colors
