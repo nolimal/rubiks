@@ -35,4 +35,4 @@ jobs:
         if: ${{ steps.filter.outputs.py_modified == 'true' }}
         run: flake8 ${{ steps.filter.outputs.py_modified_files }}
       - name: Run pytest
-        run: pytest tests
+        run: python -m pytest
