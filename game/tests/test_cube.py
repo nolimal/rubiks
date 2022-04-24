@@ -125,14 +125,6 @@ def test__slice(given_plane, contained_piece):
     assert contained_piece in pieces
 
 
-def test__rotate_face():
-    pass
-
-
-def test__rotate_pieces():
-    pass
-
-
 @pytest.mark.parametrize(
     "expected_faces, expected_edges, expected_corners",
     [((Piece(position=Point(1, 0, 0), colors=['R', None, None]),
@@ -1481,3 +1473,47 @@ def test_get_piece(x, y, z, expected_piece):
                 "DDD")
     piece = cube.get_piece(x, y, z)
     assert piece == expected_piece
+
+
+@pytest.mark.parametrize(
+    "arguments, expected_piece",
+    [([1, 1, 1], Piece(position=Point(1, 1, 1), colors=['R', 'U', 'F'])),
+     ([(-1), 1, (-1)], Piece(position=Point(-1, 1, -1), colors=['L', 'U', 'B'])),
+     ([0, 1, 1], Piece(position=Point(0, 1, 1), colors=[None, 'U', 'F']))]
+)
+def test__getitem__(arguments, expected_piece):
+    cube = Cube("UUU"
+                "UUU"
+                "UUU"
+                "LLLFFFRRRBBB"
+                "LLLFFFRRRBBB"
+                "LLLFFFRRRBBB"
+                "DDD"
+                "DDD"
+                "DDD")
+    piece = cube.__getitem__(*arguments)
+    assert piece == expected_piece
+
+
+@pytest.mark.parametrize(
+    "cube1, cube2, expected",
+    [("cube", "cube", True),
+     ("solved_cube", "solved_cube", True),
+     ("solved_cube", "cube", False)]
+)
+def test__eq__(cube1, cube2, expected, request):
+    cube1 = request.getfixturevalue(cube1)
+    cube2 = request.getfixturevalue(cube2)
+    assert expected == cube1.__eq__(cube2)
+
+
+@pytest.mark.parametrize(
+    "cube1, cube2, expected",
+    [("cube", "cube", False),
+     ("solved_cube", "solved_cube", False),
+     ("solved_cube", "cube", True)]
+)
+def test__ne__(cube1, cube2, expected, request):
+    cube1 = request.getfixturevalue(cube1)
+    cube2 = request.getfixturevalue(cube2)
+    assert expected == cube1.__ne__(cube2)
