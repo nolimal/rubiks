@@ -1,19 +1,12 @@
 import pytest
+
 from game.cube import Cube
 
 
 @pytest.fixture
 def cube_str():
     return (
-        "DLU"
-        "RRD"
-        "FFU"
-        "BBLDDRBRBLDL"
-        "RBFRUULFB DDU"
-        "FBRBBRFUDFLU"
-        "DLU"
-        "ULF"
-        "LFR"
+        "DLURRDFFUBBLDDRBRBLDLRBFRUULFBDDUFBRBBRFUDFLUDLUULFLFR"
     )
 
 
