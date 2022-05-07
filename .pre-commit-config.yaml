@@ -9,6 +9,11 @@ repos:
       - id: end-of-file-fixer
       - id: check-executables-have-shebangs
       - id: mixed-line-ending
+  - repo: https://github.com/asottile/reorder_python_imports
+    rev: v3.0.1
+    hooks:
+      - id: reorder-python-imports
+        args: [ "--py38-plus", "--application-directories",".." ]
   - repo: https://github.com/psf/black
     rev: 22.3.0
     hooks:

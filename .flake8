@@ -1,4 +1,4 @@
 [flake8]
-ignore = E111,E722, W503
+ignore = E111,E722, W503, D103
 max-line-length = 79
 disable_noqa = False
