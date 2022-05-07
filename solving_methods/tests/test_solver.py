@@ -66,3 +66,15 @@ def test_cross(solver, _after_cross):
     solver.cross()
     assert solver.cube.cube_str == _after_cross
     print(solver.cube)
+
+
+@pytest.fixture
+def _after_cross_corners():
+    return "DLURRDFFUBBLDDRBRBLDLRBFRUULFBDDUFBRBBRFUDFLUDLUULFLFR"
+
+
+def test_cross_corners(solver, _after_cross_corners):
+    solver.cross()
+    solver.cross_corners()
+    assert solver.cube.cube_str == _after_cross_corners
+    print(solver.cube)

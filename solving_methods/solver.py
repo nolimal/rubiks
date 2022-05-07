@@ -138,3 +138,97 @@ class Solver:
             self.move(move_1)
         else:
             self.move(move_2)
+
+    def cross_corners(self):
+        if DEBUG:
+            print("cross_corners")
+        fld_piece = self.cube.find_piece(
+            self.cube.front_color(),
+            self.cube.left_color(),
+            self.cube.down_color(),
+        )
+        flu_piece = self.cube.find_piece(
+            self.cube.front_color(),
+            self.cube.left_color(),
+            self.cube.up_color(),
+        )
+        frd_piece = self.cube.find_piece(
+            self.cube.front_color(),
+            self.cube.right_color(),
+            self.cube.down_color(),
+        )
+        fru_piece = self.cube.find_piece(
+            self.cube.front_color(),
+            self.cube.right_color(),
+            self.cube.up_color(),
+        )
+
+        self.place_frd_corner(
+            frd_piece,
+            self.right_piece,
+            self.down_piece,
+            self.cube.front_color(),
+        )
+        self.move("Z")
+        self.place_frd_corner(
+            fru_piece, self.up_piece, self.right_piece, self.cube.front_color()
+        )
+        self.move("Z")
+        self.place_frd_corner(
+            flu_piece, self.left_piece, self.up_piece, self.cube.front_color()
+        )
+        self.move("Z")
+        self.place_frd_corner(
+            fld_piece,
+            self.down_piece,
+            self.left_piece,
+            self.cube.front_color(),
+        )
+        self.move("Z")
+
+    def place_frd_corner(
+            self, corner_piece, right_piece, down_piece, front_color
+    ):
+        # rotate to z = -1
+        if corner_piece.position.z == 1:
+            pos = Point(corner_piece.position)
+            pos.x = pos.z = 0
+            cw, cc = get_rotations_from_face(pos)
+
+            # be careful not to screw up other pieces on the front face
+            count = 0
+            undo_move = cc
+            while corner_piece.position.z != -1:
+                self.move(cw)
+                count += 1
+
+            if count > 1:
+                # go the other direction because I don't know which is which.
+                # we need to do only one flip (net) or we'll move other
+                # correctly-placed corners out of place.
+                for _ in range(count):
+                    self.move(cc)
+
+                count = 0
+                while corner_piece.position.z != -1:
+                    self.move(cc)
+                    count += 1
+                undo_move = cw
+            self.move("B")
+            for _ in range(count):
+                self.move(undo_move)
+
+        # rotate piece to be directly below its destination
+        while (corner_piece.position.x, corner_piece.position.y) != (
+                right_piece.position.x,
+                down_piece.position.y,
+        ):
+            self.move("B")
+
+        # there are three possible orientations for a corner
+        if corner_piece.colors[0] == front_color:
+            self.move("B D Bi Di")
+        elif corner_piece.colors[1] == front_color:
+            self.move("Bi Ri B R")
+        else:
+            self.move("Ri B B R Bi Bi D Bi Di")
