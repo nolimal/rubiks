@@ -2,6 +2,7 @@ from dataclasses import dataclass
 from typing import Tuple, Union
 from constants import FACE, EDGE, CORNER
 from game.point import Point
+from typing import Union, Tuple
 
 
 @dataclass
