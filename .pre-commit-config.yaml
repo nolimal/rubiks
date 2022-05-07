@@ -22,7 +22,7 @@ repos:
           - flake8-black
           - flake8-docstrings
   - repo: https://github.com/jumanjihouse/pre-commit-hooks
-    rev: 2.1.4
+    rev: 2.1.6
     hooks:
       - id: shellcheck
         args: [ "--exclude=SC2230,SC1117,SC2015,SC2059" ]
