@@ -1,7 +1,8 @@
 import pytest
-from solving_methods.solver import Solver
-from game.point import Point
+
 from game.piece import Piece
+from game.point import Point
+from solving_methods.solver import Solver
 
 
 def test_solver_class_exists(cube):
@@ -20,24 +21,24 @@ def test_solver_initiation(cube):
     "cube1, piece, expected_piece",
     [
         (
-                "cube",
-                "left_piece",
-                Piece(position=Point(-1, 0, 0), colors=("B", None, None)),
+            "cube",
+            "left_piece",
+            Piece(position=Point(-1, 0, 0), colors=("B", None, None)),
         ),
         (
-                "cube",
-                "right_piece",
-                Piece(position=Point(1, 0, 0), colors=("F", None, None)),
+            "cube",
+            "right_piece",
+            Piece(position=Point(1, 0, 0), colors=("F", None, None)),
         ),
         (
-                "cube",
-                "up_piece",
-                Piece(position=Point(0, 1, 0), colors=(None, "R", None)),
+            "cube",
+            "up_piece",
+            Piece(position=Point(0, 1, 0), colors=(None, "R", None)),
         ),
         (
-                "cube",
-                "down_piece",
-                Piece(position=Point(0, -1, 0), colors=(None, "U", None)),
+            "cube",
+            "down_piece",
+            Piece(position=Point(0, -1, 0), colors=(None, "U", None)),
         ),
     ],
 )
@@ -45,3 +46,12 @@ def test_solver_pieces(cube1, piece, expected_piece, request):
     cube = request.getfixturevalue(cube1)
     solver = Solver(cube)
     assert solver.__getattribute__(piece) == expected_piece
+
+
+@pytest.fixture
+def solver(cube):
+    return Solver(cube)
+
+
+def test_solve_is_callable(solver):
+    pass
