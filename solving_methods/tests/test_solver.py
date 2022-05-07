@@ -105,3 +105,20 @@ def test_back_face_edges(solver, _after_back_face_edges):
     solver.back_face_edges()
     assert solver.cube.cube_str == _after_back_face_edges
     print(solver.cube)
+
+
+@pytest.fixture
+def _after_last_layer_corners_position():
+    return "DLURRDFFUBBLDDRBRBLDLRBFRUULFBDDUFBRBBRFUDFLUDLUULFLFR"
+
+
+def test_last_layer_corners_positions(
+        solver, _after_last_layer_corners_position
+):
+    solver.cross()
+    solver.cross_corners()
+    solver.second_layer()
+    solver.back_face_edges()
+    solver.last_layer_corners_position()
+    assert solver.cube.cube_str == _after_last_layer_corners_position
+    print(solver.cube)

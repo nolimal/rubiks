@@ -342,3 +342,57 @@ class Solver:
                 )
 
         self.move("Xi Xi")
+
+    def last_layer_corners_position(self):
+        self.move("X X")
+        # UP face:
+        #  4-3
+        #  ---
+        #  2-1
+        move_1 = "Li Fi L D F Di Li F L F F "  # swaps 1 and 2
+        move_2 = "F Li Fi L D F Di Li F L F "  # swaps 1 and 3
+
+        c1 = self.cube.find_piece(
+            self.cube.front_color(),
+            self.cube.right_color(),
+            self.cube.down_color(),
+        )
+        c2 = self.cube.find_piece(
+            self.cube.front_color(),
+            self.cube.left_color(),
+            self.cube.down_color(),
+        )
+        c3 = self.cube.find_piece(
+            self.cube.front_color(),
+            self.cube.right_color(),
+            self.cube.up_color(),
+        )
+        c4 = self.cube.find_piece(
+            self.cube.front_color(),
+            self.cube.left_color(),
+            self.cube.up_color(),
+        )
+
+        # place corner 4
+        if c4.position == Point(1, -1, 1):
+            self.move(move_1 + "Zi " + move_1 + " Z")
+        elif c4.position == Point(1, 1, 1):
+            self.move("Z " + move_2 + " Zi")
+        elif c4.position == Point(-1, -1, 1):
+            self.move("Zi " + move_1 + " Z")
+        assert c4.position == Point(-1, 1, 1)
+
+        # place corner 2
+        if c2.position == Point(1, 1, 1):
+            self.move(move_2 + move_1)
+        elif c2.position == Point(1, -1, 1):
+            self.move(move_1)
+        assert c2.position == Point(-1, -1, 1)
+
+        # place corner 3 and corner 1
+        if c3.position == Point(1, -1, 1):
+            self.move(move_2)
+        assert c3.position == Point(1, 1, 1)
+        assert c1.position == Point(1, -1, 1)
+
+        self.move("Xi Xi")
