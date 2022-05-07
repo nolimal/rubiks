@@ -1,6 +1,11 @@
 import pytest
 
-from constants import FRONT, BACK, UP, DOWN, LEFT, RIGHT
+from constants import BACK
+from constants import DOWN
+from constants import FRONT
+from constants import LEFT
+from constants import RIGHT
+from constants import UP
 from game.cube import Cube
 from game.matrix import Matrix
 from game.piece import Piece
