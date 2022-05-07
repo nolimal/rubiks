@@ -23,22 +23,22 @@ def test_solver_initiation(cube):
         (
                 "cube",
                 "left_piece",
-                Piece(position=Point(-1, 0, 0), colors=['B', None, None]),
+                Piece(position=Point(-1, 0, 0), colors=("B", None, None)),
         ),
         (
                 "cube",
                 "right_piece",
-                Piece(position=Point(1, 0, 0), colors=['F', None, None]),
+                Piece(position=Point(1, 0, 0), colors=("F", None, None)),
         ),
         (
                 "cube",
                 "up_piece",
-                Piece(position=Point(0, 1, 0), colors=[None, 'R', None]),
+                Piece(position=Point(0, 1, 0), colors=(None, "R", None)),
         ),
         (
                 "cube",
                 "down_piece",
-                Piece(position=Point(0, -1, 0), colors=[None, 'L', None]),
+                Piece(position=Point(0, -1, 0), colors=(None, "L", None)),
         ),
     ],
 )
@@ -57,6 +57,12 @@ def test_solve_is_callable(solver):
     assert callable(solver.solve)
 
 
-def test_cross(solver):
+@pytest.fixture
+def _after_cross():
+    return "DLURRDFFUBBLDDRBRBLDLRBFRUULFBDDUFBRBBRFUDFLUDLUULFLFR"
+
+
+def test_cross(solver, _after_cross):
     solver.cross()
-    assert solver
+    assert solver.cube.cube_str == _after_cross
+    print(solver.cube)
