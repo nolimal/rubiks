@@ -290,3 +290,55 @@ class Solver:
             self.move("Bi Di B D B L Bi Li")
         else:
             raise Exception("BUG!!")
+
+    def back_face_edges(self):
+        # rotate BACK to FRONT
+        self.move("X X")
+
+        # States:  1     2     3     4
+        #         -B-   -B-   ---   ---
+        #         BBB   BB-   BBB   -B-
+        #         -B-   ---   ---   ---
+        def state1():
+            return (
+                    self.cube[0, 1, 1].colors[2] == self.cube.front_color()
+                    and self.cube[-1, 0, 1].colors[2] == self.cube.front_color()
+                    and self.cube[0, -1, 1].colors[2] == self.cube.front_color()
+                    and self.cube[1, 0, 1].colors[2] == self.cube.front_color()
+            )
+
+        def state2():
+            return (
+                    self.cube[0, 1, 1].colors[2] == self.cube.front_color()
+                    and self.cube[-1, 0, 1].colors[2] == self.cube.front_color()
+            )
+
+        def state3():
+            return (
+                    self.cube[-1, 0, 1].colors[2] == self.cube.front_color()
+                    and self.cube[1, 0, 1].colors[2] == self.cube.front_color()
+            )
+
+        def state4():
+            return (
+                    self.cube[0, 1, 1].colors[2] != self.cube.front_color()
+                    and self.cube[-1, 0, 1].colors[2] != self.cube.front_color()
+                    and self.cube[0, -1, 1].colors[2] != self.cube.front_color()
+                    and self.cube[1, 0, 1].colors[2] != self.cube.front_color()
+            )
+
+        count = 0
+        while not state1():
+            if state4() or state2():
+                self.move("D F R Fi Ri Di")
+            elif state3():
+                self.move("D R F Ri Fi Di")
+            else:
+                self.move("F")
+            count += 1
+            if count == 10:
+                raise Exception(
+                    "Stuck in loop - unsolvable cube\n" + str(self.cube)
+                )
+
+        self.move("Xi Xi")

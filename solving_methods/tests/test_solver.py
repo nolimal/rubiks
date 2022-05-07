@@ -91,3 +91,17 @@ def test_second_layer(solver, _after_second_layer):
     solver.second_layer()
     assert solver.cube.cube_str == _after_second_layer
     print(solver.cube)
+
+
+@pytest.fixture
+def _after_back_face_edges():
+    return "DLURRDFFUBBLDDRBRBLDLRBFRUULFBDDUFBRBBRFUDFLUDLUULFLFR"
+
+
+def test_back_face_edges(solver, _after_back_face_edges):
+    solver.cross()
+    solver.cross_corners()
+    solver.second_layer()
+    solver.back_face_edges()
+    assert solver.cube.cube_str == _after_back_face_edges
+    print(solver.cube)
