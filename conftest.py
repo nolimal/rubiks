@@ -5,9 +5,7 @@ from game.cube import Cube
 
 @pytest.fixture
 def cube_str():
-    return (
-        "DLURRDFFUBBLDDRBRBLDLRBFRUULFBDDUFBRBBRFUDFLUDLUULFLFR"
-    )
+    return "DLURRDFFUBBLDDRBRBLDLRBFRUULFBDDUFBRBBRFUDFLUDLUULFLFR"
 
 
 @pytest.fixture
