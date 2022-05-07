@@ -10,7 +10,7 @@ repos:
       - id: check-merge-conflicts
       - id: check-executables-have-shebangs
       - id: mixed-line-ending
-  - repo: reorder_python_imports
+  - repo: https://github.com/asottile/reorder_python_imports
     rev: v3.0.1
       hooks:
           - id: flake8
