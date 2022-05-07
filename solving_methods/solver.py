@@ -1,6 +1,6 @@
 from constants import DOWN
 from constants import LEFT
-from constants import RIGHT
+from constants import RIGHT, FRONT
 from constants import UP
 from game.point import Point
 from solving_methods.utilities import get_rotations_from_face
@@ -396,3 +396,285 @@ class Solver:
         assert c1.position == Point(1, -1, 1)
 
         self.move("Xi Xi")
+
+    def last_layer_corners_orientation(self):
+        self.move("X X")
+
+        # States:  1        2      3      4      5      6      7      8
+        #           B      B             B      B        B
+        #         BB-      -B-B   BBB    -BB    -BB   B-B-   B-B-B   BBB
+        #         BBB      BBB    BBB    BBB    BBB    BBB    BBB    BBB
+        #         -B-B     BB-    -B-    -BB    BB-B  B-B-   B-B-B   BBB
+        #         B          B    B B    B               B
+        def state1():
+            return (
+                    self.cube[1, 1, 1].colors[1] == self.cube.front_color()
+                    and self.cube[-1, -1, 1].colors[1] == self.cube.front_color()
+                    and self.cube[1, -1, 1].colors[0] == self.cube.front_color()
+            )
+
+        def state2():
+            return (
+                    self.cube[-1, 1, 1].colors[1] == self.cube.front_color()
+                    and self.cube[1, 1, 1].colors[0] == self.cube.front_color()
+                    and self.cube[1, -1, 1].colors[1] == self.cube.front_color()
+            )
+
+        def state3():
+            return (
+                    self.cube[-1, -1, 1].colors[1] == self.cube.front_color()
+                    and self.cube[1, -1, 1].colors[1] == self.cube.front_color()
+                    and self.cube[-1, 1, 1].colors[2] == self.cube.front_color()
+                    and self.cube[1, 1, 1].colors[2] == self.cube.front_color()
+            )
+
+        def state4():
+            return (
+                    self.cube[-1, 1, 1].colors[1] == self.cube.front_color()
+                    and self.cube[-1, -1, 1].colors[1] == self.cube.front_color()
+                    and self.cube[1, 1, 1].colors[2] == self.cube.front_color()
+                    and self.cube[1, -1, 1].colors[2] == self.cube.front_color()
+            )
+
+        def state5():
+            return (
+                    self.cube[-1, 1, 1].colors[1] == self.cube.front_color()
+                    and self.cube[1, -1, 1].colors[0] == self.cube.front_color()
+            )
+
+        def state6():
+            return (
+                    self.cube[1, 1, 1].colors[1] == self.cube.front_color()
+                    and self.cube[1, -1, 1].colors[1] == self.cube.front_color()
+                    and self.cube[-1, -1, 1].colors[0] == self.cube.front_color()
+                    and self.cube[-1, 1, 1].colors[0] == self.cube.front_color()
+            )
+
+        def state7():
+            return (
+                    self.cube[1, 1, 1].colors[0] == self.cube.front_color()
+                    and self.cube[1, -1, 1].colors[0] == self.cube.front_color()
+                    and self.cube[-1, -1, 1].colors[0] == self.cube.front_color()
+                    and self.cube[-1, 1, 1].colors[0] == self.cube.front_color()
+            )
+
+        def state8():
+            return (
+                    self.cube[1, 1, 1].colors[2] == self.cube.front_color()
+                    and self.cube[1, -1, 1].colors[2] == self.cube.front_color()
+                    and self.cube[-1, -1, 1].colors[2] == self.cube.front_color()
+                    and self.cube[-1, 1, 1].colors[2] == self.cube.front_color()
+            )
+
+        move_1 = "Ri Fi R Fi Ri F F R F F "
+        move_2 = "R F Ri F R F F Ri F F "
+
+        while not state8():
+            if state1():
+                self.move(move_1)
+            elif state2():
+                self.move(move_2)
+            elif state3():
+                self.move(move_2 + "F F " + move_1)
+            elif state4():
+                self.move(move_2 + move_1)
+            elif state5():
+                self.move(move_1 + "F " + move_2)
+            elif state6():
+                self.move(move_1 + "Fi " + move_1)
+            elif state7():
+                self.move(move_1 + "F F " + move_1)
+            else:
+                self.move("F")
+
+        # rotate corners into correct locations
+        # (cube is inverted, so swap up and down colors)
+        bru_corner = self.cube.find_piece(
+            self.cube.front_color(),
+            self.cube.right_color(),
+            self.cube.up_color(),
+        )
+        while bru_corner.position != Point(1, 1, 1):
+            self.move("F")
+
+        self.move("Xi Xi")
+
+    def last_layer_edges(self):
+        self.move("X X")
+
+        br_edge = self.cube.find_piece(
+            self.cube.front_color(), self.cube.right_color()
+        )
+        bl_edge = self.cube.find_piece(
+            self.cube.front_color(), self.cube.left_color()
+        )
+        bu_edge = self.cube.find_piece(
+            self.cube.front_color(), self.cube.up_color()
+        )
+        bd_edge = self.cube.find_piece(
+            self.cube.front_color(), self.cube.down_color()
+        )
+
+        # States:
+        #       1              2
+        #      ---            ---
+        #      ---            ---
+        #      -B-            -a-
+        #  --- B-B ---    aaa BBB ---
+        #  --B -B- B--    aaB -B- B--
+        #  --- B-B ---    aaa B-B ---
+        #      -B-            -B-
+        #      ---            ---
+        #      ---            ---
+        #              (aB edge on any FRONT)
+        def state1():
+            return (
+                    bu_edge.colors[2] != self.cube.front_color()
+                    and bd_edge.colors[2] != self.cube.front_color()
+                    and bl_edge.colors[2] != self.cube.front_color()
+                    and br_edge.colors[2] != self.cube.front_color()
+            )
+
+        def state2():
+            return (
+                    bu_edge.colors[2] == self.cube.front_color()
+                    or bd_edge.colors[2] == self.cube.front_color()
+                    or bl_edge.colors[2] == self.cube.front_color()
+                    or br_edge.colors[2] == self.cube.front_color()
+            )
+
+        cycle_move = "R R F D Ui R R Di U F R R"
+        h_pattern_move = "Ri S Ri Ri S S Ri Fi Fi R Si Si Ri Ri Si R Fi Fi "
+        fish_move = "Di Li " + h_pattern_move + " L D"
+
+        if state1():
+            # ideally, convert state1 into state2
+            self._handle_last_layer_state1(h_pattern_move)
+        if state2():
+            self._handle_last_layer_state2(cycle_move)
+
+        def h_pattern1():
+            return (
+                    self.cube[-1, 0, 1].colors[0] != self.cube.left_color()
+                    and self.cube[1, 0, 1].colors[0] != self.cube.right_color()
+                    and self.cube[0, -1, 1].colors[1] == self.cube.down_color()
+                    and self.cube[0, 1, 1].colors[1] == self.cube.up_color()
+            )
+
+        def h_pattern2():
+            return (
+                    self.cube[-1, 0, 1].colors[0] == self.cube.left_color()
+                    and self.cube[1, 0, 1].colors[0] == self.cube.right_color()
+                    and self.cube[0, -1, 1].colors[1] == self.cube.front_color()
+                    and self.cube[0, 1, 1].colors[1] == self.cube.front_color()
+            )
+
+        def fish_pattern():
+            return (
+                    self.cube[FRONT + DOWN].colors[2] == self.cube.down_color()
+                    and self.cube[FRONT + RIGHT].colors[2]
+                    == self.cube.right_color()
+                    and self.cube[FRONT + DOWN].colors[1]
+                    == self.cube.front_color()
+                    and self.cube[FRONT + RIGHT].colors[0]
+                    == self.cube.front_color()
+            )
+
+        count = 0
+        while not self.cube.is_solved():
+            for _ in range(4):
+                if fish_pattern():
+                    self.move(fish_move)
+                    if self.cube.is_solved():
+                        return
+                else:
+                    self.move("Z")
+
+            if h_pattern1():
+                self.move(h_pattern_move)
+            elif h_pattern2():
+                self.move("Z " + h_pattern_move + "Zi")
+            else:
+                self.move(cycle_move)
+            count += 1
+            if count == 10:
+                raise Exception(
+                    "Stuck in loop - unsolvable cube:\n" + str(self.cube)
+                )
+
+        self.move("Xi Xi")
+
+    def _handle_last_layer_state1(self, h_move):
+        if DEBUG:
+            print("_handle_last_layer_state1")
+
+        def check_edge_lr():
+            return self.cube[LEFT + FRONT].colors[2] == self.cube.left_color()
+
+        count = 0
+        while not check_edge_lr():
+            self.move("F")
+            count += 1
+            if count == 4:
+                raise Exception("Bug: Failed to handle last layer state1")
+
+        self.move(h_move)
+
+        for _ in range(count):
+            self.move("Fi")
+
+    def _handle_last_layer_state2(self, cycle_move):
+        if DEBUG:
+            print("_handle_last_layer_state2")
+
+        def correct_edge():
+            piece = self.cube[LEFT + FRONT]
+            if (
+                    piece.colors[2] == self.cube.front_color()
+                    and piece.colors[0] == self.cube.left_color()
+            ):
+                return piece
+            piece = self.cube[RIGHT + FRONT]
+            if (
+                    piece.colors[2] == self.cube.front_color()
+                    and piece.colors[0] == self.cube.right_color()
+            ):
+                return piece
+            piece = self.cube[UP + FRONT]
+            if (
+                    piece.colors[2] == self.cube.front_color()
+                    and piece.colors[1] == self.cube.up_color()
+            ):
+                return piece
+            piece = self.cube[DOWN + FRONT]
+            if (
+                    piece.colors[2] == self.cube.front_color()
+                    and piece.colors[1] == self.cube.down_color()
+            ):
+                return piece
+
+        count = 0
+        while True:
+            edge = correct_edge()
+            if edge is None:
+                self.move(cycle_move)
+            else:
+                break
+
+            count += 1
+
+            if count % 3 == 0:
+                self.move("Z")
+
+            if count == 12:
+                raise Exception(
+                    "Stuck in loop - unsolvable cube:\n" + str(self.cube)
+                )
+
+        while edge.position != Point(-1, 0, 1):
+            self.move("Z")
+
+        assert (
+                self.cube[LEFT + FRONT].colors[2] == self.cube.front_color()
+                and self.cube[LEFT + FRONT].colors[0] == self.cube.left_color()
+        )

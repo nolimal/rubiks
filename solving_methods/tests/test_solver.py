@@ -66,6 +66,7 @@ def test_cross(solver, _after_cross):
     solver.cross()
     assert solver.cube.cube_str == _after_cross
     print(solver.cube)
+    assert not solver.cube.is_solved()
 
 
 @pytest.fixture
@@ -78,6 +79,7 @@ def test_cross_corners(solver, _after_cross_corners):
     solver.cross_corners()
     assert solver.cube.cube_str == _after_cross_corners
     print(solver.cube)
+    assert not solver.cube.is_solved()
 
 
 @pytest.fixture
@@ -91,6 +93,7 @@ def test_second_layer(solver, _after_second_layer):
     solver.second_layer()
     assert solver.cube.cube_str == _after_second_layer
     print(solver.cube)
+    assert not solver.cube.is_solved()
 
 
 @pytest.fixture
@@ -105,6 +108,7 @@ def test_back_face_edges(solver, _after_back_face_edges):
     solver.back_face_edges()
     assert solver.cube.cube_str == _after_back_face_edges
     print(solver.cube)
+    assert not solver.cube.is_solved()
 
 
 @pytest.fixture
@@ -122,3 +126,41 @@ def test_last_layer_corners_positions(
     solver.last_layer_corners_position()
     assert solver.cube.cube_str == _after_last_layer_corners_position
     print(solver.cube)
+    assert not solver.cube.is_solved()
+
+
+@pytest.fixture
+def _after_last_layer_corners_orientation():
+    return "DLURRDFFUBBLDDRBRBLDLRBFRUULFBDDUFBRBBRFUDFLUDLUULFLFR"
+
+
+def test_last_layer_corners_orientation(
+        solver, _after_last_layer_corners_orientation
+):
+    solver.cross()
+    solver.cross_corners()
+    solver.second_layer()
+    solver.back_face_edges()
+    solver.last_layer_corners_position()
+    solver.last_layer_corners_orientation()
+    assert solver.cube.cube_str == _after_last_layer_corners_orientation
+    print(solver.cube)
+    assert not solver.cube.is_solved()
+
+
+@pytest.fixture
+def _after_last_layer_edges():
+    return "DLURRDFFUBBLDDRBRBLDLRBFRUULFBDDUFBRBBRFUDFLUDLUULFLFR"
+
+
+def test_after_last_layer_edges(solver, _after_last_layer_edges):
+    solver.cross()
+    solver.cross_corners()
+    solver.second_layer()
+    solver.back_face_edges()
+    solver.last_layer_corners_position()
+    solver.last_layer_corners_orientation()
+    solver.last_layer_edges()
+    assert solver.cube.cube_str == _after_last_layer_edges
+    print(solver.cube)
+    assert solver.cube.is_solved()
