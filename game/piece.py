@@ -27,7 +27,9 @@ class Piece:
         elif self.colors.count(None) == 0:
             self.type = CORNER
         else:
-            raise ValueError(f"Must have 1, 2, or 3 colors, given: {self.colors}")
+            raise ValueError(
+                f"Must have 1, 2, or 3 colors, given: {self.colors}"
+            )
 
     def rotate(self, matrix):
         """Rotation matrix multiplication for a single piece"""

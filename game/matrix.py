@@ -21,7 +21,9 @@ class Matrix:
             raise ValueError(f"Matrix requires 9 items, got {self.vals}")
 
     def __str__(self):
-        return "[{}, {}, {},\n" " {}, {}, {},\n" " {}, {}, {}]".format(*self.vals)
+        return (
+            "[{}, {}, {},\n" " {}, {}, {},\n" " {}, {}, {}]".format(*self.vals)
+        )
 
     def __repr__(self):
         return (
@@ -50,7 +52,9 @@ class Matrix:
     def __mul__(self, other):
         """Do Matrix-Matrix or Matrix-Point multiplication."""
         if isinstance(other, Point):
-            return Point(tuple([other.dot(Point(tuple(row))) for row in self.rows()]))
+            return Point(
+                tuple([other.dot(Point(tuple(row))) for row in self.rows()])
+            )
         elif isinstance(other, Matrix):
             return Matrix(
                 Point(row).dot(Point(col))

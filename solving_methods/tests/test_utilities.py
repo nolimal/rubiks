@@ -15,7 +15,9 @@ from game.point import Point
         (BACK, "B", "Bi"),
     ],
 )
-def test_get_rotations_from_face(face, expected_rotation_cw, expected_rotation_cc):
+def test_get_rotations_from_face(
+        face, expected_rotation_cw, expected_rotation_cc
+):
     rotation_cw, rotation_cc = get_rotations_from_face(face)
     assert expected_rotation_cw == rotation_cw
     assert expected_rotation_cc == rotation_cc

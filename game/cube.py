@@ -53,14 +53,17 @@ class Cube:
                 DDD                      45 46 47
                 DDD                      48 49 50
                 DDD                      51 52 53
-        Note that the back side is mirrored in the horizontal axis during unfolding.
+        Note that the back side is mirrored in the horizontal axis
+        during unfolding.
         Each 'sticker' must be a single character.
         """
         if isinstance(self.cube_str, Cube):
             self._from_cube(self.cube_str)
             return
 
-        cube_str = "".join(x for x in self.cube_str if x not in string.whitespace)
+        cube_str = "".join(
+            x for x in self.cube_str if x not in string.whitespace
+        )
         assert len(cube_str) == 54
         self._set_faces()
         self._set_edges()
@@ -81,7 +84,8 @@ class Cube:
     def _set_edges(self):
         self.edges = (
             Piece(
-                position=RIGHT + UP, colors=(self.cube_str[16], self.cube_str[5], None)
+                position=RIGHT + UP,
+                colors=(self.cube_str[16], self.cube_str[5], None),
             ),
             Piece(
                 position=RIGHT + DOWN,
@@ -96,7 +100,8 @@ class Cube:
                 colors=(self.cube_str[29], None, self.cube_str[30]),
             ),
             Piece(
-                position=LEFT + UP, colors=(self.cube_str[10], self.cube_str[3], None)
+                position=LEFT + UP,
+                colors=(self.cube_str[10], self.cube_str[3], None),
             ),
             Piece(
                 position=LEFT + DOWN,
@@ -111,10 +116,12 @@ class Cube:
                 colors=(self.cube_str[21], None, self.cube_str[32]),
             ),
             Piece(
-                position=UP + FRONT, colors=(None, self.cube_str[7], self.cube_str[13])
+                position=UP + FRONT,
+                colors=(None, self.cube_str[7], self.cube_str[13]),
             ),
             Piece(
-                position=UP + BACK, colors=(None, self.cube_str[1], self.cube_str[19])
+                position=UP + BACK,
+                colors=(None, self.cube_str[1], self.cube_str[19]),
             ),
             Piece(
                 position=DOWN + FRONT,
@@ -130,23 +137,43 @@ class Cube:
         self.corners = (
             Piece(
                 position=RIGHT + UP + FRONT,
-                colors=(self.cube_str[15], self.cube_str[8], self.cube_str[14]),
+                colors=(
+                    self.cube_str[15],
+                    self.cube_str[8],
+                    self.cube_str[14],
+                ),
             ),
             Piece(
                 position=RIGHT + UP + BACK,
-                colors=(self.cube_str[17], self.cube_str[2], self.cube_str[18]),
+                colors=(
+                    self.cube_str[17],
+                    self.cube_str[2],
+                    self.cube_str[18],
+                ),
             ),
             Piece(
                 position=RIGHT + DOWN + FRONT,
-                colors=(self.cube_str[39], self.cube_str[47], self.cube_str[38]),
+                colors=(
+                    self.cube_str[39],
+                    self.cube_str[47],
+                    self.cube_str[38],
+                ),
             ),
             Piece(
                 position=RIGHT + DOWN + BACK,
-                colors=(self.cube_str[41], self.cube_str[53], self.cube_str[42]),
+                colors=(
+                    self.cube_str[41],
+                    self.cube_str[53],
+                    self.cube_str[42],
+                ),
             ),
             Piece(
                 position=LEFT + UP + FRONT,
-                colors=(self.cube_str[11], self.cube_str[6], self.cube_str[12]),
+                colors=(
+                    self.cube_str[11],
+                    self.cube_str[6],
+                    self.cube_str[12],
+                ),
             ),
             Piece(
                 position=LEFT + UP + BACK,
@@ -154,11 +181,19 @@ class Cube:
             ),
             Piece(
                 position=LEFT + DOWN + FRONT,
-                colors=(self.cube_str[35], self.cube_str[45], self.cube_str[36]),
+                colors=(
+                    self.cube_str[35],
+                    self.cube_str[45],
+                    self.cube_str[36],
+                ),
             ),
             Piece(
                 position=LEFT + DOWN + BACK,
-                colors=(self.cube_str[33], self.cube_str[51], self.cube_str[44]),
+                colors=(
+                    self.cube_str[33],
+                    self.cube_str[51],
+                    self.cube_str[44],
+                ),
             ),
         )
 
@@ -179,7 +214,8 @@ class Cube:
             Piece(position=Point(p.position), colors=p.colors) for p in c.edges
         ]
         self.corners = [
-            Piece(position=Point(p.position), colors=p.colors) for p in c.corners
+            Piece(position=Point(p.position), colors=p.colors)
+            for p in c.corners
         ]
         self.pieces = self.faces + self.edges + self.corners
         self._assert_data()
@@ -208,7 +244,8 @@ class Cube:
 
     def _slice(self, plane):
         """
-        :param plane: A sum of any two of X_AXIS, Y_AXIS, Z_AXIS (e.g. X_AXIS + Y_AXIS)
+        :param plane: A sum of any two of X_AXIS, Y_AXIS, Z_AXIS
+        (e.g. X_AXIS + Y_AXIS)
         :return: A list of Pieces in the given plane
         """
         assert plane.count(0) == 1
@@ -301,7 +338,8 @@ class Cube:
     def sequence(self, move_str):
         """
         :param move_str:
-        :param moves: A string containing notated moves separated by spaces: "L Ri U M Ui B M"
+        :param moves: A string containing notated moves separated by spaces:
+        "L Ri U M Ui B M"
         """
         moves = [getattr(self, name) for name in move_str.split()]
         for move in moves:
@@ -331,7 +369,10 @@ class Cube:
         return self.get_piece(*args)
 
     def __eq__(self, other):
-        return isinstance(other, Cube) and self._color_list() == other._color_list()
+        return (
+                isinstance(other, Cube)
+                and self._color_list() == other._color_list()
+        )
 
     def __ne__(self, other):
         return not (self == other)
@@ -340,7 +381,9 @@ class Cube:
         """
         :return: A set containing the colors of all stickers on the cube
         """
-        return set(c for piece in self.pieces for c in piece.colors if c is not None)
+        return set(
+            c for piece in self.pieces for c in piece.colors if c is not None
+        )
 
     def left_color(self):
         return self[LEFT].colors[0]
@@ -375,7 +418,9 @@ class Cube:
         ]
         up = [
             p.colors[1]
-            for p in sorted(self._face(UP), key=lambda p: (p.position.z, p.position.x))
+            for p in sorted(
+                self._face(UP), key=lambda p: (p.position.z, p.position.x)
+            )
         ]
         down = [
             p.colors[1]

@@ -41,7 +41,15 @@ def test_cube_is_not_solved(cube):
 @pytest.fixture
 def solved_cube_str():
     return (
-        "UUU" "UUU" "UUU" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "DDD" "DDD" "DDD"
+        "UUU"
+        "UUU"
+        "UUU"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "DDD"
+        "DDD"
+        "DDD"
     )
 
 
@@ -70,7 +78,15 @@ def rotation_matrix():
 @pytest.mark.parametrize("given_axis", [FRONT, BACK, UP, DOWN, LEFT, RIGHT])
 def test__face(given_axis):
     cube = Cube(
-        "UUU" "UUU" "UUU" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "DDD" "DDD" "DDD"
+        "UUU"
+        "UUU"
+        "UUU"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "DDD"
+        "DDD"
+        "DDD"
     )
     pieces = cube._face(given_axis)
     count_faces = 0
@@ -92,13 +108,24 @@ def test__face(given_axis):
     "given_plane, contained_piece",
     [
         (FRONT + UP, Piece(position=Point(0, 1, 0), colors=[None, "U", None])),
-        (FRONT + RIGHT, Piece(position=Point(1, 0, 0), colors=["R", None, None])),
+        (
+                FRONT + RIGHT,
+                Piece(position=Point(1, 0, 0), colors=["R", None, None]),
+        ),
         (UP + RIGHT, Piece(position=Point(1, 0, 0), colors=["R", None, None])),
     ],
 )
 def test__slice(given_plane, contained_piece):
     cube = Cube(
-        "UUU" "UUU" "UUU" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "DDD" "DDD" "DDD"
+        "UUU"
+        "UUU"
+        "UUU"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "DDD"
+        "DDD"
+        "DDD"
     )
     pieces = cube._slice(given_plane)
     assert len(pieces) == 8
@@ -146,7 +173,15 @@ def test__slice(given_plane, contained_piece):
 )
 def test_L_rotation(expected_faces, expected_edges, expected_corners):
     cube = Cube(
-        "UUU" "UUU" "UUU" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "DDD" "DDD" "DDD"
+        "UUU"
+        "UUU"
+        "UUU"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "DDD"
+        "DDD"
+        "DDD"
     )
     assert cube.faces == expected_faces
     assert not cube.edges == expected_edges
@@ -198,7 +233,15 @@ def test_L_rotation(expected_faces, expected_edges, expected_corners):
 )
 def test_Li_rotation(expected_faces, expected_edges, expected_corners):
     cube = Cube(
-        "UUU" "UUU" "UUU" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "DDD" "DDD" "DDD"
+        "UUU"
+        "UUU"
+        "UUU"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "DDD"
+        "DDD"
+        "DDD"
     )
     assert cube.faces == expected_faces
     assert not cube.edges == expected_edges
@@ -250,7 +293,15 @@ def test_Li_rotation(expected_faces, expected_edges, expected_corners):
 )
 def test_R_rotation(expected_faces, expected_edges, expected_corners):
     cube = Cube(
-        "UUU" "UUU" "UUU" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "DDD" "DDD" "DDD"
+        "UUU"
+        "UUU"
+        "UUU"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "DDD"
+        "DDD"
+        "DDD"
     )
     assert cube.faces == expected_faces
     assert not cube.edges == expected_edges
@@ -302,7 +353,15 @@ def test_R_rotation(expected_faces, expected_edges, expected_corners):
 )
 def test_Ri_rotation(expected_faces, expected_edges, expected_corners):
     cube = Cube(
-        "UUU" "UUU" "UUU" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "DDD" "DDD" "DDD"
+        "UUU"
+        "UUU"
+        "UUU"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "DDD"
+        "DDD"
+        "DDD"
     )
     assert cube.faces == expected_faces
     assert not cube.edges == expected_edges
@@ -354,7 +413,15 @@ def test_Ri_rotation(expected_faces, expected_edges, expected_corners):
 )
 def test_U_rotation(expected_faces, expected_edges, expected_corners):
     cube = Cube(
-        "UUU" "UUU" "UUU" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "DDD" "DDD" "DDD"
+        "UUU"
+        "UUU"
+        "UUU"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "DDD"
+        "DDD"
+        "DDD"
     )
     assert cube.faces == expected_faces
     assert not cube.edges == expected_edges
@@ -406,7 +473,15 @@ def test_U_rotation(expected_faces, expected_edges, expected_corners):
 )
 def test_Ui_rotation(expected_faces, expected_edges, expected_corners):
     cube = Cube(
-        "UUU" "UUU" "UUU" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "DDD" "DDD" "DDD"
+        "UUU"
+        "UUU"
+        "UUU"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "DDD"
+        "DDD"
+        "DDD"
     )
     assert cube.faces == expected_faces
     assert not cube.edges == expected_edges
@@ -458,7 +533,15 @@ def test_Ui_rotation(expected_faces, expected_edges, expected_corners):
 )
 def test_D_rotation(expected_faces, expected_edges, expected_corners):
     cube = Cube(
-        "UUU" "UUU" "UUU" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "DDD" "DDD" "DDD"
+        "UUU"
+        "UUU"
+        "UUU"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "DDD"
+        "DDD"
+        "DDD"
     )
     assert cube.faces == expected_faces
     assert not cube.edges == expected_edges
@@ -510,7 +593,15 @@ def test_D_rotation(expected_faces, expected_edges, expected_corners):
 )
 def test_Di_rotation(expected_faces, expected_edges, expected_corners):
     cube = Cube(
-        "UUU" "UUU" "UUU" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "DDD" "DDD" "DDD"
+        "UUU"
+        "UUU"
+        "UUU"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "DDD"
+        "DDD"
+        "DDD"
     )
     assert cube.faces == expected_faces
     assert not cube.edges == expected_edges
@@ -562,7 +653,15 @@ def test_Di_rotation(expected_faces, expected_edges, expected_corners):
 )
 def test_F_rotation(expected_faces, expected_edges, expected_corners):
     cube = Cube(
-        "UUU" "UUU" "UUU" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "DDD" "DDD" "DDD"
+        "UUU"
+        "UUU"
+        "UUU"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "DDD"
+        "DDD"
+        "DDD"
     )
     assert cube.faces == expected_faces
     assert not cube.edges == expected_edges
@@ -614,7 +713,15 @@ def test_F_rotation(expected_faces, expected_edges, expected_corners):
 )
 def test_Fi_rotation(expected_faces, expected_edges, expected_corners):
     cube = Cube(
-        "UUU" "UUU" "UUU" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "DDD" "DDD" "DDD"
+        "UUU"
+        "UUU"
+        "UUU"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "DDD"
+        "DDD"
+        "DDD"
     )
     assert cube.faces == expected_faces
     assert not cube.edges == expected_edges
@@ -666,7 +773,15 @@ def test_Fi_rotation(expected_faces, expected_edges, expected_corners):
 )
 def test_B_rotation(expected_faces, expected_edges, expected_corners):
     cube = Cube(
-        "UUU" "UUU" "UUU" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "DDD" "DDD" "DDD"
+        "UUU"
+        "UUU"
+        "UUU"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "DDD"
+        "DDD"
+        "DDD"
     )
     assert cube.faces == expected_faces
     assert not cube.edges == expected_edges
@@ -718,7 +833,15 @@ def test_B_rotation(expected_faces, expected_edges, expected_corners):
 )
 def test_Bi_rotation(expected_faces, expected_edges, expected_corners):
     cube = Cube(
-        "UUU" "UUU" "UUU" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "DDD" "DDD" "DDD"
+        "UUU"
+        "UUU"
+        "UUU"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "DDD"
+        "DDD"
+        "DDD"
     )
     assert cube.faces == expected_faces
     assert not cube.edges == expected_edges
@@ -770,7 +893,15 @@ def test_Bi_rotation(expected_faces, expected_edges, expected_corners):
 )
 def test_M_rotation(expected_faces, expected_edges, expected_corners):
     cube = Cube(
-        "UUU" "UUU" "UUU" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "DDD" "DDD" "DDD"
+        "UUU"
+        "UUU"
+        "UUU"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "DDD"
+        "DDD"
+        "DDD"
     )
     assert not cube.faces == expected_faces
     assert not cube.edges == expected_edges
@@ -822,7 +953,15 @@ def test_M_rotation(expected_faces, expected_edges, expected_corners):
 )
 def test_Mi_rotation(expected_faces, expected_edges, expected_corners):
     cube = Cube(
-        "UUU" "UUU" "UUU" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "DDD" "DDD" "DDD"
+        "UUU"
+        "UUU"
+        "UUU"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "DDD"
+        "DDD"
+        "DDD"
     )
     assert not cube.faces == expected_faces
     assert not cube.edges == expected_edges
@@ -874,7 +1013,15 @@ def test_Mi_rotation(expected_faces, expected_edges, expected_corners):
 )
 def test_E_rotation(expected_faces, expected_edges, expected_corners):
     cube = Cube(
-        "UUU" "UUU" "UUU" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "DDD" "DDD" "DDD"
+        "UUU"
+        "UUU"
+        "UUU"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "DDD"
+        "DDD"
+        "DDD"
     )
     assert not cube.faces == expected_faces
     assert not cube.edges == expected_edges
@@ -926,7 +1073,15 @@ def test_E_rotation(expected_faces, expected_edges, expected_corners):
 )
 def test_Ei_rotation(expected_faces, expected_edges, expected_corners):
     cube = Cube(
-        "UUU" "UUU" "UUU" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "DDD" "DDD" "DDD"
+        "UUU"
+        "UUU"
+        "UUU"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "DDD"
+        "DDD"
+        "DDD"
     )
     assert not cube.faces == expected_faces
     assert not cube.edges == expected_edges
@@ -978,7 +1133,15 @@ def test_Ei_rotation(expected_faces, expected_edges, expected_corners):
 )
 def test_S_rotation(expected_faces, expected_edges, expected_corners):
     cube = Cube(
-        "UUU" "UUU" "UUU" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "DDD" "DDD" "DDD"
+        "UUU"
+        "UUU"
+        "UUU"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "DDD"
+        "DDD"
+        "DDD"
     )
     assert not cube.faces == expected_faces
     assert not cube.edges == expected_edges
@@ -1030,7 +1193,15 @@ def test_S_rotation(expected_faces, expected_edges, expected_corners):
 )
 def test_Si_rotation(expected_faces, expected_edges, expected_corners):
     cube = Cube(
-        "UUU" "UUU" "UUU" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "DDD" "DDD" "DDD"
+        "UUU"
+        "UUU"
+        "UUU"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "DDD"
+        "DDD"
+        "DDD"
     )
     assert not cube.faces == expected_faces
     assert not cube.edges == expected_edges
@@ -1082,7 +1253,15 @@ def test_Si_rotation(expected_faces, expected_edges, expected_corners):
 )
 def test_X_rotation(expected_faces, expected_edges, expected_corners):
     cube = Cube(
-        "UUU" "UUU" "UUU" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "DDD" "DDD" "DDD"
+        "UUU"
+        "UUU"
+        "UUU"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "DDD"
+        "DDD"
+        "DDD"
     )
     assert not cube.faces == expected_faces
     assert not cube.edges == expected_edges
@@ -1134,7 +1313,15 @@ def test_X_rotation(expected_faces, expected_edges, expected_corners):
 )
 def test_Xi_rotation(expected_faces, expected_edges, expected_corners):
     cube = Cube(
-        "UUU" "UUU" "UUU" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "DDD" "DDD" "DDD"
+        "UUU"
+        "UUU"
+        "UUU"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "DDD"
+        "DDD"
+        "DDD"
     )
     assert not cube.faces == expected_faces
     assert not cube.edges == expected_edges
@@ -1186,7 +1373,15 @@ def test_Xi_rotation(expected_faces, expected_edges, expected_corners):
 )
 def test_Y_rotation(expected_faces, expected_edges, expected_corners):
     cube = Cube(
-        "UUU" "UUU" "UUU" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "DDD" "DDD" "DDD"
+        "UUU"
+        "UUU"
+        "UUU"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "DDD"
+        "DDD"
+        "DDD"
     )
     assert not cube.faces == expected_faces
     assert not cube.edges == expected_edges
@@ -1238,7 +1433,15 @@ def test_Y_rotation(expected_faces, expected_edges, expected_corners):
 )
 def test_Yi_rotation(expected_faces, expected_edges, expected_corners):
     cube = Cube(
-        "UUU" "UUU" "UUU" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "DDD" "DDD" "DDD"
+        "UUU"
+        "UUU"
+        "UUU"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "DDD"
+        "DDD"
+        "DDD"
     )
     assert not cube.faces == expected_faces
     assert not cube.edges == expected_edges
@@ -1290,7 +1493,15 @@ def test_Yi_rotation(expected_faces, expected_edges, expected_corners):
 )
 def test_Z_rotation(expected_faces, expected_edges, expected_corners):
     cube = Cube(
-        "UUU" "UUU" "UUU" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "DDD" "DDD" "DDD"
+        "UUU"
+        "UUU"
+        "UUU"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "DDD"
+        "DDD"
+        "DDD"
     )
     assert not cube.faces == expected_faces
     assert not cube.edges == expected_edges
@@ -1342,7 +1553,15 @@ def test_Z_rotation(expected_faces, expected_edges, expected_corners):
 )
 def test_Zi_rotation(expected_faces, expected_edges, expected_corners):
     cube = Cube(
-        "UUU" "UUU" "UUU" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "DDD" "DDD" "DDD"
+        "UUU"
+        "UUU"
+        "UUU"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "DDD"
+        "DDD"
+        "DDD"
     )
     assert not cube.faces == expected_faces
     assert not cube.edges == expected_edges
@@ -1397,10 +1616,26 @@ def test_move_sequence_identical_to_separate_moves(
         move_str, expected_faces, expected_edges, expected_corners
 ):
     cube = Cube(
-        "UUU" "UUU" "UUU" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "DDD" "DDD" "DDD"
+        "UUU"
+        "UUU"
+        "UUU"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "DDD"
+        "DDD"
+        "DDD"
     )
     cube_alternative = Cube(
-        "UUU" "UUU" "UUU" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "DDD" "DDD" "DDD"
+        "UUU"
+        "UUU"
+        "UUU"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "DDD"
+        "DDD"
+        "DDD"
     )
     assert not cube.faces == expected_faces
     assert not cube.edges == expected_edges
@@ -1422,14 +1657,28 @@ def test_move_sequence_identical_to_separate_moves(
 @pytest.mark.parametrize(
     "colors, expected_piece",
     [
-        (["R", "U", "F"], Piece(position=Point(1, 1, 1), colors=["R", "U", "F"])),
-        (["L", "U", "B"], Piece(position=Point(-1, 1, -1), colors=["L", "U", "B"])),
+        (
+                ["R", "U", "F"],
+                Piece(position=Point(1, 1, 1), colors=["R", "U", "F"]),
+        ),
+        (
+                ["L", "U", "B"],
+                Piece(position=Point(-1, 1, -1), colors=["L", "U", "B"]),
+        ),
         ([None, "U", "F"], None),
     ],
 )
 def test_find_piece(colors, expected_piece):
     cube = Cube(
-        "UUU" "UUU" "UUU" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "DDD" "DDD" "DDD"
+        "UUU"
+        "UUU"
+        "UUU"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "DDD"
+        "DDD"
+        "DDD"
     )
     piece = cube.find_piece(*colors)
     assert piece == expected_piece
@@ -1439,13 +1688,26 @@ def test_find_piece(colors, expected_piece):
     "x, y, z, expected_piece",
     [
         (1, 1, 1, Piece(position=Point(1, 1, 1), colors=["R", "U", "F"])),
-        ((-1), 1, (-1), Piece(position=Point(-1, 1, -1), colors=["L", "U", "B"])),
+        (
+                (-1),
+                1,
+                (-1),
+                Piece(position=Point(-1, 1, -1), colors=["L", "U", "B"]),
+        ),
         (0, 1, 1, Piece(position=Point(0, 1, 1), colors=[None, "U", "F"])),
     ],
 )
 def test_get_piece(x, y, z, expected_piece):
     cube = Cube(
-        "UUU" "UUU" "UUU" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "DDD" "DDD" "DDD"
+        "UUU"
+        "UUU"
+        "UUU"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "DDD"
+        "DDD"
+        "DDD"
     )
     piece = cube.get_piece(x, y, z)
     assert piece == expected_piece
@@ -1455,13 +1717,24 @@ def test_get_piece(x, y, z, expected_piece):
     "arguments, expected_piece",
     [
         ([1, 1, 1], Piece(position=Point(1, 1, 1), colors=["R", "U", "F"])),
-        ([(-1), 1, (-1)], Piece(position=Point(-1, 1, -1), colors=["L", "U", "B"])),
+        (
+                [(-1), 1, (-1)],
+                Piece(position=Point(-1, 1, -1), colors=["L", "U", "B"]),
+        ),
         ([0, 1, 1], Piece(position=Point(0, 1, 1), colors=[None, "U", "F"])),
     ],
 )
 def test__getitem__(arguments, expected_piece):
     cube = Cube(
-        "UUU" "UUU" "UUU" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "LLLFFFRRRBBB" "DDD" "DDD" "DDD"
+        "UUU"
+        "UUU"
+        "UUU"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "LLLFFFRRRBBB"
+        "DDD"
+        "DDD"
+        "DDD"
     )
     piece = cube.__getitem__(*arguments)
     assert piece == expected_piece
@@ -1495,37 +1768,49 @@ def test__ne__(cube1, cube2, expected, request):
     assert expected == cube1.__ne__(cube2)
 
 
-@pytest.mark.parametrize("cube1, expected_color", [("cube", "B"), ("solved_cube", "L")])
+@pytest.mark.parametrize(
+    "cube1, expected_color", [("cube", "B"), ("solved_cube", "L")]
+)
 def test_left_color(cube1, expected_color, request):
     cube1 = request.getfixturevalue(cube1)
     assert expected_color == cube1.left_color()
 
 
-@pytest.mark.parametrize("cube1, expected_color", [("cube", "F"), ("solved_cube", "R")])
+@pytest.mark.parametrize(
+    "cube1, expected_color", [("cube", "F"), ("solved_cube", "R")]
+)
 def test_right_color(cube1, expected_color, request):
     cube1 = request.getfixturevalue(cube1)
     assert expected_color == cube1.right_color()
 
 
-@pytest.mark.parametrize("cube1, expected_color", [("cube", "R"), ("solved_cube", "U")])
+@pytest.mark.parametrize(
+    "cube1, expected_color", [("cube", "R"), ("solved_cube", "U")]
+)
 def test_up_color(cube1, expected_color, request):
     cube1 = request.getfixturevalue(cube1)
     assert expected_color == cube1.up_color()
 
 
-@pytest.mark.parametrize("cube1, expected_color", [("cube", "U"), ("solved_cube", "D")])
+@pytest.mark.parametrize(
+    "cube1, expected_color", [("cube", "U"), ("solved_cube", "D")]
+)
 def test_down_color(cube1, expected_color, request):
     cube1 = request.getfixturevalue(cube1)
     assert expected_color == cube1.down_color()
 
 
-@pytest.mark.parametrize("cube1, expected_color", [("cube", "U"), ("solved_cube", "F")])
+@pytest.mark.parametrize(
+    "cube1, expected_color", [("cube", "U"), ("solved_cube", "F")]
+)
 def test_front_color(cube1, expected_color, request):
     cube1 = request.getfixturevalue(cube1)
     assert expected_color == cube1.front_color()
 
 
-@pytest.mark.parametrize("cube1, expected_color", [("cube", "D"), ("solved_cube", "B")])
+@pytest.mark.parametrize(
+    "cube1, expected_color", [("cube", "D"), ("solved_cube", "B")]
+)
 def test_back_color(cube1, expected_color, request):
     cube1 = request.getfixturevalue(cube1)
     assert expected_color == cube1.back_color()
