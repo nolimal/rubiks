@@ -1,9 +1,10 @@
 import pytest
+
+from constants import FRONT, BACK, UP, DOWN, LEFT, RIGHT
 from game.cube import Cube
 from game.matrix import Matrix
 from game.piece import Piece
 from game.point import Point
-from constants import FRONT, BACK, UP, DOWN, LEFT, RIGHT
 
 
 def test_class_cube_works_with_cube_str(cube):

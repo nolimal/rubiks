@@ -54,4 +54,4 @@ def solver(cube):
 
 
 def test_solve_is_callable(solver):
-    pass
+    assert callable(solver.solve)

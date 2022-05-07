@@ -1,6 +1,7 @@
 from __future__ import annotations
-from typing import Tuple, Union, Optional
+
 from dataclasses import dataclass
+from typing import Tuple, Union, Optional
 
 
 @dataclass
@@ -77,15 +78,15 @@ class Point:
     def __eq__(self, other):
         if isinstance(other, (tuple, list)):
             return (
-                    self.x == other[0]
-                    and self.y == other[1]
-                    and self.z == other[2]
+                self.x == other[0]
+                and self.y == other[1]
+                and self.z == other[2]
             )
         return (
-                isinstance(other, self.__class__)
-                and self.x == other.x
-                and self.y == other.y
-                and self.z == other.z
+            isinstance(other, self.__class__)
+            and self.x == other.x
+            and self.y == other.y
+            and self.z == other.z
         )
 
     def __ne__(self, other):

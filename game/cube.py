@@ -1,7 +1,9 @@
 from __future__ import annotations
 
-from game.piece import Piece
-from game.point import Point
+import string
+from dataclasses import dataclass
+from typing import Tuple, Union, Optional, List
+
 from constants import (
     RIGHT,
     LEFT,
@@ -22,9 +24,8 @@ from constants import (
     Y_AXIS,
     Z_AXIS,
 )
-import string
-from dataclasses import dataclass
-from typing import Tuple, Union, Optional, List
+from game.piece import Piece
+from game.point import Point
 
 
 @dataclass
@@ -226,12 +227,12 @@ class Cube:
             return all(c == colors[0] for c in colors)
 
         return (
-                check([piece.colors[2] for piece in self._face(FRONT)])
-                and check([piece.colors[2] for piece in self._face(BACK)])
-                and check([piece.colors[1] for piece in self._face(UP)])
-                and check([piece.colors[1] for piece in self._face(DOWN)])
-                and check([piece.colors[0] for piece in self._face(LEFT)])
-                and check([piece.colors[0] for piece in self._face(RIGHT)])
+            check([piece.colors[2] for piece in self._face(FRONT)])
+            and check([piece.colors[2] for piece in self._face(BACK)])
+            and check([piece.colors[1] for piece in self._face(UP)])
+            and check([piece.colors[1] for piece in self._face(DOWN)])
+            and check([piece.colors[0] for piece in self._face(LEFT)])
+            and check([piece.colors[0] for piece in self._face(RIGHT)])
         )
 
     def _face(self, axis):
@@ -350,7 +351,7 @@ class Cube:
             return
         for p in self.pieces:
             if p.colors.count(None) == 3 - len(colors) and all(
-                    c in p.colors for c in colors
+                c in p.colors for c in colors
             ):
                 return p
 
@@ -370,8 +371,8 @@ class Cube:
 
     def __eq__(self, other):
         return (
-                isinstance(other, Cube)
-                and self._color_list() == other._color_list()
+            isinstance(other, Cube)
+            and self._color_list() == other._color_list()
         )
 
     def __ne__(self, other):
@@ -442,20 +443,20 @@ class Cube:
         ]
 
         return (
-                up
-                + left[0:3]
-                + front[0:3]
-                + right[0:3]
-                + back[0:3]
-                + left[3:6]
-                + front[3:6]
-                + right[3:6]
-                + back[3:6]
-                + left[6:9]
-                + front[6:9]
-                + right[6:9]
-                + back[6:9]
-                + down
+            up
+            + left[0:3]
+            + front[0:3]
+            + right[0:3]
+            + back[0:3]
+            + left[3:6]
+            + front[3:6]
+            + right[3:6]
+            + back[3:6]
+            + left[6:9]
+            + front[6:9]
+            + right[6:9]
+            + back[6:9]
+            + down
         )
 
     def flat_str(self):
