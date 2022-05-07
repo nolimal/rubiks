@@ -1,7 +1,27 @@
 from __future__ import annotations
 
 from game.piece import Piece
-from constants import *
+from game.point import Point
+from constants import (
+    RIGHT,
+    LEFT,
+    UP,
+    DOWN,
+    FRONT,
+    FACE,
+    BACK,
+    CORNER,
+    ROT_XY_CW,
+    ROT_XY_CC,
+    ROT_XZ_CW,
+    ROT_XZ_CC,
+    ROT_YZ_CW,
+    ROT_YZ_CC,
+    EDGE,
+    X_AXIS,
+    Y_AXIS,
+    Z_AXIS,
+)
 import string
 from dataclasses import dataclass
 from typing import Tuple, Union, Optional, List
