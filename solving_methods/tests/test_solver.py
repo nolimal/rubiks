@@ -78,3 +78,16 @@ def test_cross_corners(solver, _after_cross_corners):
     solver.cross_corners()
     assert solver.cube.cube_str == _after_cross_corners
     print(solver.cube)
+
+
+@pytest.fixture
+def _after_second_layer():
+    return "DLURRDFFUBBLDDRBRBLDLRBFRUULFBDDUFBRBBRFUDFLUDLUULFLFR"
+
+
+def test_second_layer(solver, _after_second_layer):
+    solver.cross()
+    solver.cross_corners()
+    solver.second_layer()
+    assert solver.cube.cube_str == _after_second_layer
+    print(solver.cube)

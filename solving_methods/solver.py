@@ -232,3 +232,61 @@ class Solver:
             self.move("Bi Ri B R")
         else:
             self.move("Ri B B R Bi Bi D Bi Di")
+
+    def second_layer(self):
+        rd_piece = self.cube.find_piece(
+            self.cube.right_color(), self.cube.down_color()
+        )
+        ru_piece = self.cube.find_piece(
+            self.cube.right_color(), self.cube.up_color()
+        )
+        ld_piece = self.cube.find_piece(
+            self.cube.left_color(), self.cube.down_color()
+        )
+        lu_piece = self.cube.find_piece(
+            self.cube.left_color(), self.cube.up_color()
+        )
+
+        self.place_middle_layer_ld_edge(
+            ld_piece, self.cube.left_color(), self.cube.down_color()
+        )
+        self.move("Z")
+        self.place_middle_layer_ld_edge(
+            rd_piece, self.cube.left_color(), self.cube.down_color()
+        )
+        self.move("Z")
+        self.place_middle_layer_ld_edge(
+            ru_piece, self.cube.left_color(), self.cube.down_color()
+        )
+        self.move("Z")
+        self.place_middle_layer_ld_edge(
+            lu_piece, self.cube.left_color(), self.cube.down_color()
+        )
+        self.move("Z")
+
+    def place_middle_layer_ld_edge(self, ld_piece, left_color, down_color):
+        # move to z == -1
+        if ld_piece.position.z == 0:
+            count = 0
+            while (ld_piece.position.x, ld_piece.position.y) != (-1, -1):
+                self.move("Z")
+                count += 1
+
+            self.move("B L Bi Li Bi Di B D")
+            for _ in range(count):
+                self.move("Zi")
+
+        assert ld_piece.position.z == -1
+
+        if ld_piece.colors[2] == left_color:
+            # left_color is on the back face, move piece to down face
+            while ld_piece.position.y != -1:
+                self.move("B")
+            self.move("B L Bi Li Bi Di B D")
+        elif ld_piece.colors[2] == down_color:
+            # down_color is on the back face, move to left face
+            while ld_piece.position.x != -1:
+                self.move("B")
+            self.move("Bi Di B D B L Bi Li")
+        else:
+            raise Exception("BUG!!")
