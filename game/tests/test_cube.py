@@ -6,26 +6,6 @@ from game.point import Point
 from constants import FRONT, BACK, UP, DOWN, LEFT, RIGHT
 
 
-@pytest.fixture
-def cube_str():
-    return (
-        "DLU"
-        "RRD"
-        "FFU"
-        "BBLDDRBRBLDL"
-        "RBFRUULFB DDU"
-        "FBRBBRFUDFLU"
-        "DLU"
-        "ULF"
-        "LFR"
-    )
-
-
-@pytest.fixture
-def cube(cube_str):
-    return Cube(cube_str)
-
-
 def test_class_cube_works_with_cube_str(cube):
     assert isinstance(cube, Cube)
 
@@ -36,26 +16,6 @@ def test_class_cube_works_also_with_cube_instance(cube):
 
 def test_cube_is_not_solved(cube):
     assert not cube.is_solved()
-
-
-@pytest.fixture
-def solved_cube_str():
-    return (
-        "UUU"
-        "UUU"
-        "UUU"
-        "LLLFFFRRRBBB"
-        "LLLFFFRRRBBB"
-        "LLLFFFRRRBBB"
-        "DDD"
-        "DDD"
-        "DDD"
-    )
-
-
-@pytest.fixture
-def solved_cube(solved_cube_str):
-    return Cube(solved_cube_str)
 
 
 def test_cube_is_solved(solved_cube):
