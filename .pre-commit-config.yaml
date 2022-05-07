@@ -10,17 +10,17 @@ repos:
       - id: check-merge-conflicts
       - id: check-executables-have-shebangs
       - id: mixed-line-ending
-  - repo: https://github.com/asottile/reorder_python_imports
+  - repo: reorder_python_imports
     rev: v3.0.1
-     hooks:
-       - id: flake8
-         additional_dependencies:
-           - dlint
-           - flake8-bugbar
-           - flake8-implicit-str-concat
-           - flake8-absolute-import
-           - flake8-black
-           - flake8-docstrings
+      hooks:
+          - id: flake8
+            additional_dependencies:
+              - dlint
+              - flake8-bugbar
+              - flake8-implicit-str-concat
+              - flake8-absolute-import
+              - flake8-black
+              - flake8-docstrings
   - repo: https://github.com/jumanjihouse/pre-commit-hooks
     rev: 2.1.4
     hooks:
