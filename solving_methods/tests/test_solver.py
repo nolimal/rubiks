@@ -164,3 +164,10 @@ def test_after_last_layer_edges(solver, _after_last_layer_edges):
     assert solver.cube.cube_str == _after_last_layer_edges
     print(solver.cube)
     assert solver.cube.is_solved()
+
+
+def test_integration_test_solve(cube):
+    assert not cube.is_solved()
+    solver = Solver(cube)
+    solver.solve()
+    assert solver.cube.is_solved()

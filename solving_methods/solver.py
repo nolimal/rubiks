@@ -23,6 +23,26 @@ class Solver:
         if DEBUG:
             print(self.cube)
         self.cross()
+        if DEBUG:
+            print("Cross:\n", self.cube)
+        self.cross_corners()
+        if DEBUG:
+            print("Corners:\n", self.cube)
+        self.second_layer()
+        if DEBUG:
+            print("Second layer:\n", self.cube)
+        self.back_face_edges()
+        if DEBUG:
+            print("Last layer edges\n", self.cube)
+        self.last_layer_corners_position()
+        if DEBUG:
+            print("Last layer corners -- position\n", self.cube)
+        self.last_layer_corners_orientation()
+        if DEBUG:
+            print("Last layer corners -- orientation\n", self.cube)
+        self.last_layer_edges()
+        if DEBUG:
+            print("Solved\n", self.cube)
 
     def move(self, move_str):
         self.moves.extend(move_str.split())
