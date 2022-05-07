@@ -10,10 +10,11 @@ from typing import Tuple, Union, Optional, List
 @dataclass
 class Cube:
     """Stores Pieces which are addressed through an x-y-z coordinate system:
-        -x is the LEFT direction, +x is the RIGHT direction
-        -y is the DOWN direction, +y is the UP direction
-        -z is the BACK direction, +z is the FRONT direction
+    -x is the LEFT direction, +x is the RIGHT direction
+    -y is the DOWN direction, +y is the UP direction
+    -z is the BACK direction, +z is the FRONT direction
     """
+
     cube_str: Union[str, Cube]
     faces: Optional[Tuple, List] = None
     edges: Optional[Tuple, List] = None
@@ -54,34 +55,91 @@ class Cube:
             Piece(position=UP, colors=(None, self.cube_str[4], None)),
             Piece(position=DOWN, colors=(None, self.cube_str[49], None)),
             Piece(position=FRONT, colors=(None, None, self.cube_str[25])),
-            Piece(position=BACK, colors=(None, None, self.cube_str[31])))
+            Piece(position=BACK, colors=(None, None, self.cube_str[31])),
+        )
 
     def _set_edges(self):
         self.edges = (
-            Piece(position=RIGHT + UP, colors=(self.cube_str[16], self.cube_str[5], None)),
-            Piece(position=RIGHT + DOWN, colors=(self.cube_str[40], self.cube_str[50], None)),
-            Piece(position=RIGHT + FRONT, colors=(self.cube_str[27], None, self.cube_str[26])),
-            Piece(position=RIGHT + BACK, colors=(self.cube_str[29], None, self.cube_str[30])),
-            Piece(position=LEFT + UP, colors=(self.cube_str[10], self.cube_str[3], None)),
-            Piece(position=LEFT + DOWN, colors=(self.cube_str[34], self.cube_str[48], None)),
-            Piece(position=LEFT + FRONT, colors=(self.cube_str[23], None, self.cube_str[24])),
-            Piece(position=LEFT + BACK, colors=(self.cube_str[21], None, self.cube_str[32])),
-            Piece(position=UP + FRONT, colors=(None, self.cube_str[7], self.cube_str[13])),
-            Piece(position=UP + BACK, colors=(None, self.cube_str[1], self.cube_str[19])),
-            Piece(position=DOWN + FRONT, colors=(None, self.cube_str[46], self.cube_str[37])),
-            Piece(position=DOWN + BACK, colors=(None, self.cube_str[52], self.cube_str[43])),
+            Piece(
+                position=RIGHT + UP, colors=(self.cube_str[16], self.cube_str[5], None)
+            ),
+            Piece(
+                position=RIGHT + DOWN,
+                colors=(self.cube_str[40], self.cube_str[50], None),
+            ),
+            Piece(
+                position=RIGHT + FRONT,
+                colors=(self.cube_str[27], None, self.cube_str[26]),
+            ),
+            Piece(
+                position=RIGHT + BACK,
+                colors=(self.cube_str[29], None, self.cube_str[30]),
+            ),
+            Piece(
+                position=LEFT + UP, colors=(self.cube_str[10], self.cube_str[3], None)
+            ),
+            Piece(
+                position=LEFT + DOWN,
+                colors=(self.cube_str[34], self.cube_str[48], None),
+            ),
+            Piece(
+                position=LEFT + FRONT,
+                colors=(self.cube_str[23], None, self.cube_str[24]),
+            ),
+            Piece(
+                position=LEFT + BACK,
+                colors=(self.cube_str[21], None, self.cube_str[32]),
+            ),
+            Piece(
+                position=UP + FRONT, colors=(None, self.cube_str[7], self.cube_str[13])
+            ),
+            Piece(
+                position=UP + BACK, colors=(None, self.cube_str[1], self.cube_str[19])
+            ),
+            Piece(
+                position=DOWN + FRONT,
+                colors=(None, self.cube_str[46], self.cube_str[37]),
+            ),
+            Piece(
+                position=DOWN + BACK,
+                colors=(None, self.cube_str[52], self.cube_str[43]),
+            ),
         )
 
     def _set_corners(self):
         self.corners = (
-            Piece(position=RIGHT + UP + FRONT, colors=(self.cube_str[15], self.cube_str[8], self.cube_str[14])),
-            Piece(position=RIGHT + UP + BACK, colors=(self.cube_str[17], self.cube_str[2], self.cube_str[18])),
-            Piece(position=RIGHT + DOWN + FRONT, colors=(self.cube_str[39], self.cube_str[47], self.cube_str[38])),
-            Piece(position=RIGHT + DOWN + BACK, colors=(self.cube_str[41], self.cube_str[53], self.cube_str[42])),
-            Piece(position=LEFT + UP + FRONT, colors=(self.cube_str[11], self.cube_str[6], self.cube_str[12])),
-            Piece(position=LEFT + UP + BACK, colors=(self.cube_str[9], self.cube_str[0], self.cube_str[20])),
-            Piece(position=LEFT + DOWN + FRONT, colors=(self.cube_str[35], self.cube_str[45], self.cube_str[36])),
-            Piece(position=LEFT + DOWN + BACK, colors=(self.cube_str[33], self.cube_str[51], self.cube_str[44])),
+            Piece(
+                position=RIGHT + UP + FRONT,
+                colors=(self.cube_str[15], self.cube_str[8], self.cube_str[14]),
+            ),
+            Piece(
+                position=RIGHT + UP + BACK,
+                colors=(self.cube_str[17], self.cube_str[2], self.cube_str[18]),
+            ),
+            Piece(
+                position=RIGHT + DOWN + FRONT,
+                colors=(self.cube_str[39], self.cube_str[47], self.cube_str[38]),
+            ),
+            Piece(
+                position=RIGHT + DOWN + BACK,
+                colors=(self.cube_str[41], self.cube_str[53], self.cube_str[42]),
+            ),
+            Piece(
+                position=LEFT + UP + FRONT,
+                colors=(self.cube_str[11], self.cube_str[6], self.cube_str[12]),
+            ),
+            Piece(
+                position=LEFT + UP + BACK,
+                colors=(self.cube_str[9], self.cube_str[0], self.cube_str[20]),
+            ),
+            Piece(
+                position=LEFT + DOWN + FRONT,
+                colors=(self.cube_str[35], self.cube_str[45], self.cube_str[36]),
+            ),
+            Piece(
+                position=LEFT + DOWN + BACK,
+                colors=(self.cube_str[33], self.cube_str[51], self.cube_str[44]),
+            ),
         )
 
     def _set_pieces(self):
@@ -94,9 +152,15 @@ class Cube:
         assert all(p.type == CORNER for p in self.corners)
 
     def _from_cube(self, c):
-        self.faces = [Piece(position=Point(p.position), colors=p.colors) for p in c.faces]
-        self.edges = [Piece(position=Point(p.position), colors=p.colors) for p in c.edges]
-        self.corners = [Piece(position=Point(p.position), colors=p.colors) for p in c.corners]
+        self.faces = [
+            Piece(position=Point(p.position), colors=p.colors) for p in c.faces
+        ]
+        self.edges = [
+            Piece(position=Point(p.position), colors=p.colors) for p in c.edges
+        ]
+        self.corners = [
+            Piece(position=Point(p.position), colors=p.colors) for p in c.corners
+        ]
         self.pieces = self.faces + self.edges + self.corners
         self._assert_data()
 
@@ -105,12 +169,14 @@ class Cube:
             assert len(colors) == 9
             return all(c == colors[0] for c in colors)
 
-        return (check([piece.colors[2] for piece in self._face(FRONT)]) and
-                check([piece.colors[2] for piece in self._face(BACK)]) and
-                check([piece.colors[1] for piece in self._face(UP)]) and
-                check([piece.colors[1] for piece in self._face(DOWN)]) and
-                check([piece.colors[0] for piece in self._face(LEFT)]) and
-                check([piece.colors[0] for piece in self._face(RIGHT)]))
+        return (
+                check([piece.colors[2] for piece in self._face(FRONT)])
+                and check([piece.colors[2] for piece in self._face(BACK)])
+                and check([piece.colors[1] for piece in self._face(UP)])
+                and check([piece.colors[1] for piece in self._face(DOWN)])
+                and check([piece.colors[0] for piece in self._face(LEFT)])
+                and check([piece.colors[0] for piece in self._face(RIGHT)])
+        )
 
     def _face(self, axis):
         """
@@ -225,8 +291,9 @@ class Cube:
         if None in colors:
             return
         for p in self.pieces:
-            if p.colors.count(None) == 3 - len(colors) \
-                    and all(c in p.colors for c in colors):
+            if p.colors.count(None) == 3 - len(colors) and all(
+                    c in p.colors for c in colors
+            ):
                 return p
 
     def get_piece(self, x, y, z):
@@ -274,29 +341,72 @@ class Cube:
         return self[BACK].colors[2]
 
     def _color_list(self):
-        right = [p.colors[0] for p in sorted(self._face(RIGHT), key=lambda p: (-p.position.y, -p.position.z))]
-        left = [p.colors[0] for p in sorted(self._face(LEFT), key=lambda p: (-p.position.y, p.position.z))]
-        up = [p.colors[1] for p in sorted(self._face(UP), key=lambda p: (p.position.z, p.position.x))]
-        down = [p.colors[1] for p in sorted(self._face(DOWN), key=lambda p: (-p.position.z, p.position.x))]
-        front = [p.colors[2] for p in sorted(self._face(FRONT), key=lambda p: (-p.position.y, p.position.x))]
-        back = [p.colors[2] for p in sorted(self._face(BACK), key=lambda p: (-p.position.y, -p.position.x))]
+        right = [
+            p.colors[0]
+            for p in sorted(
+                self._face(RIGHT), key=lambda p: (-p.position.y, -p.position.z)
+            )
+        ]
+        left = [
+            p.colors[0]
+            for p in sorted(
+                self._face(LEFT), key=lambda p: (-p.position.y, p.position.z)
+            )
+        ]
+        up = [
+            p.colors[1]
+            for p in sorted(self._face(UP), key=lambda p: (p.position.z, p.position.x))
+        ]
+        down = [
+            p.colors[1]
+            for p in sorted(
+                self._face(DOWN), key=lambda p: (-p.position.z, p.position.x)
+            )
+        ]
+        front = [
+            p.colors[2]
+            for p in sorted(
+                self._face(FRONT), key=lambda p: (-p.position.y, p.position.x)
+            )
+        ]
+        back = [
+            p.colors[2]
+            for p in sorted(
+                self._face(BACK), key=lambda p: (-p.position.y, -p.position.x)
+            )
+        ]
 
-        return (up + left[0:3] + front[0:3] + right[0:3] + back[0:3]
-                + left[3:6] + front[3:6] + right[3:6] + back[3:6]
-                + left[6:9] + front[6:9] + right[6:9] + back[6:9] + down)
+        return (
+                up
+                + left[0:3]
+                + front[0:3]
+                + right[0:3]
+                + back[0:3]
+                + left[3:6]
+                + front[3:6]
+                + right[3:6]
+                + back[3:6]
+                + left[6:9]
+                + front[6:9]
+                + right[6:9]
+                + back[6:9]
+                + down
+        )
 
     def flat_str(self):
         return "".join(x for x in str(self) if x not in string.whitespace)
 
     def __str__(self):
-        template = ("    {}{}{}\n"
-                    "    {}{}{}\n"
-                    "    {}{}{}\n"
-                    "{}{}{} {}{}{} {}{}{} {}{}{}\n"
-                    "{}{}{} {}{}{} {}{}{} {}{}{}\n"
-                    "{}{}{} {}{}{} {}{}{} {}{}{}\n"
-                    "    {}{}{}\n"
-                    "    {}{}{}\n"
-                    "    {}{}{}")
+        template = (
+            "    {}{}{}\n"
+            "    {}{}{}\n"
+            "    {}{}{}\n"
+            "{}{}{} {}{}{} {}{}{} {}{}{}\n"
+            "{}{}{} {}{}{} {}{}{} {}{}{}\n"
+            "{}{}{} {}{}{} {}{}{} {}{}{}\n"
+            "    {}{}{}\n"
+            "    {}{}{}\n"
+            "    {}{}{}"
+        )
 
         return "    " + template.format(*self._color_list()).strip()

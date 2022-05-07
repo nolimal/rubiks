@@ -39,14 +39,12 @@ def test_set_piece_type(piece):
 
 @pytest.fixture
 def rotation_matrix():
-    return Matrix([0, 1, 0,
-                   -1, 0, 0,
-                   0, 0, 1])
+    return Matrix([0, 1, 0, -1, 0, 0, 0, 0, 1])
 
 
 def test_rotate(piece, rotation_matrix):
     position_before = piece.position
     piece.rotate(rotation_matrix)
-    assert piece.colors == [None, 'Red', None]
+    assert piece.colors == [None, "Red", None]
     assert position_before != piece.position
     assert piece.position == Point(0, -1, 0)

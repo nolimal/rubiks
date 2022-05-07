@@ -12,8 +12,8 @@ from game.point import Point
         (UP, "U", "Ui"),
         (DOWN, "D", "Di"),
         (FRONT, "F", "Fi"),
-        (BACK, "B", "Bi")
-    ]
+        (BACK, "B", "Bi"),
+    ],
 )
 def test_get_rotations_from_face(face, expected_rotation_cw, expected_rotation_cc):
     rotation_cw, rotation_cc = get_rotations_from_face(face)

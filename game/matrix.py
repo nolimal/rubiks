@@ -6,6 +6,7 @@ from dataclasses import dataclass
 @dataclass
 class Matrix:
     """A 3x3 matrix"""
+
     vals: Union[List[int], List[List[int]]]
 
     def __post_init__(self):
@@ -20,14 +21,14 @@ class Matrix:
             raise ValueError(f"Matrix requires 9 items, got {self.vals}")
 
     def __str__(self):
-        return ("[{}, {}, {},\n"
-                " {}, {}, {},\n"
-                " {}, {}, {}]".format(*self.vals))
+        return "[{}, {}, {},\n" " {}, {}, {},\n" " {}, {}, {}]".format(*self.vals)
 
     def __repr__(self):
-        return ("Matrix({}, {}, {},\n"
-                "       {}, {}, {},\n"
-                "       {}, {}, {})".format(*self.vals))
+        return (
+            "Matrix({}, {}, {},\n"
+            "       {}, {}, {},\n"
+            "       {}, {}, {})".format(*self.vals)
+        )
 
     def __eq__(self, other):
         return self.vals == other.vals
@@ -51,7 +52,11 @@ class Matrix:
         if isinstance(other, Point):
             return Point(tuple([other.dot(Point(tuple(row))) for row in self.rows()]))
         elif isinstance(other, Matrix):
-            return Matrix(Point(row).dot(Point(col)) for row in self.rows() for col in other.cols())
+            return Matrix(
+                Point(row).dot(Point(col))
+                for row in self.rows()
+                for col in other.cols()
+            )
 
     def rows(self):
         yield self.vals[0:3]

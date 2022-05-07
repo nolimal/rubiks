@@ -30,6 +30,9 @@ jobs:
           cache: 'pip'
       - name: Install dependencies
         run: pip install -r requirements/requirements.txt
+      - name: Run black
+        if: ${{ steps.filter.outputs.py_modified == 'true' }}
+        run: black ${{ steps.filter.outputs.py_modified_files }}
       - name: Run flake8
         run: flake8
       - name: Run pytest
