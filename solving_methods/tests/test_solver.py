@@ -1,3 +1,6 @@
+from operator import itemgetter
+
+import numpy as np
 import pytest
 
 from game.piece import Piece
@@ -171,3 +174,45 @@ def test_integration_test_solve(cube):
     solver = Solver(cube)
     solver.solve()
     assert solver.cube.is_solved()
+
+
+# According to the WCA Relations by the World Cube Association
+# Check: https://www.youtube.com/watch?v=wMZ7NkmH2Mg
+# And: https://www.worldcubeassociation.org/regulations/
+# wca-regulations-and-guidelines.pdf
+# And: http://localhost:2014/scramble
+# And: https://www.worldcubeassociation.org/regulations/scrambles/
+@pytest.mark.parametrize(
+    "cube1, original_scramble",
+    [
+        ("solved_cube", "Di R L F Ri L U U F D D Ri L L F F D R R B B D D L L Ui B B Ui"),
+        ("solved_cube", "Ui F B Ri U Ri Fi D D L R Ui F F L L Ui D L L Ui B B Ui"),
+        ("solved_cube", "F Ui F F Di B L L F D D B U U B B U U L B R F F Ui L R R"),
+        ("solved_cube", "R R F F L L Fi U U Bi D D B B L U F F Li Ri U Ri U Ri U L"),
+        ("solved_cube", "R R F F L L Fi U U Bi D D B B L U F F Li Ri U Ri U Ri U L"),
+        ("solved_cube", "F F Di B B Di B B R R U U Ri Di R R D B B R R B B Fi Di Fi Li"),
+        ("solved_cube", "Ri U B U U R R Fi Ri Fi Ui L L U F F Ui Di Fi L L D D")
+    ]
+)
+def test_integration_test_solve_parametrized_cube(cube1, original_scramble, request):
+    cube = request.getfixturevalue(cube1)
+    assert cube.is_solved()
+
+    cube.sequence(original_scramble)
+    assert not cube.is_solved()
+    solver = Solver(cube)
+    solver.solve()
+    assert solver.cube.is_solved()
+
+    mylist = original_scramble.split()
+    # make 5 tests for each original_scramble
+    for i in range(5):
+        perm = list(np.random.permutation(np.random.randint(3, len(mylist))))
+        moves = itemgetter(*perm)(mylist)
+        moves = ' '.join(moves)
+        cube.sequence(moves)
+        assert not cube.is_solved()
+        solver = Solver(cube)
+        solver.solve()
+        assert solver.cube.is_solved()
+        print(len(solver.moves))
