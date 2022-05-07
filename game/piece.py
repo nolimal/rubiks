@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from typing import Tuple, Union
 from constants import FACE, EDGE, CORNER
 from game.point import Point
 from typing import Union, Tuple
@@ -37,8 +36,9 @@ class Piece:
         before = self.position
         self.position = matrix * self.position
 
-        # we need to swap the positions of two things in self.colors so colors appear
-        # on the correct faces. rot gives us the axes to swap between.
+        # we need to swap the positions of two things in self.colors
+        # so colors appear on the correct faces.
+        # rot gives us the axes to swap between.
         rot = self.position - before
         if not any(rot):
             return  # no change occurred

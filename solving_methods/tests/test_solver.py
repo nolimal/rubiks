@@ -12,18 +12,34 @@ def test_solver_class_exists(cube):
 def test_solver_initiation(cube):
     solver = Solver(cube)
     assert cube.__eq__(solver.cube)
-    assert solver.colors - {' ', 'U', 'R', 'F', 'L', 'D', 'B'} == set()
+    assert solver.colors - {" ", "U", "R", "F", "L", "D", "B"} == set()
     assert solver.moves == []
 
 
 @pytest.mark.parametrize(
     "cube1, piece, expected_piece",
     [
-        ("cube", "left_piece", Piece(position=Point(-1, 0, 0), colors=('B', None, None))),
-        ("cube", "right_piece", Piece(position=Point(1, 0, 0), colors=('F', None, None))),
-        ("cube", "up_piece", Piece(position=Point(0, 1, 0), colors=(None, 'R', None))),
-        ("cube", "down_piece", Piece(position=Point(0, -1, 0), colors=(None, 'U', None))),
-    ]
+        (
+                "cube",
+                "left_piece",
+                Piece(position=Point(-1, 0, 0), colors=("B", None, None)),
+        ),
+        (
+                "cube",
+                "right_piece",
+                Piece(position=Point(1, 0, 0), colors=("F", None, None)),
+        ),
+        (
+                "cube",
+                "up_piece",
+                Piece(position=Point(0, 1, 0), colors=(None, "R", None)),
+        ),
+        (
+                "cube",
+                "down_piece",
+                Piece(position=Point(0, -1, 0), colors=(None, "U", None)),
+        ),
+    ],
 )
 def test_solver_pieces(cube1, piece, expected_piece, request):
     cube = request.getfixturevalue(cube1)

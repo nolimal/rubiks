@@ -28,5 +28,5 @@ def non_face():
     return Point(1, 1, 1)
 
 
-def test_get_rotations_from_face(non_face):
+def test_get_rotations_from_face_non_face(non_face):
     assert get_rotations_from_face(non_face) is None

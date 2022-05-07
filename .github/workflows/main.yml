@@ -33,5 +33,8 @@ jobs:
       - name: Run black
         if: ${{ steps.filter.outputs.py_modified == 'true' }}
         run: black ${{ steps.filter.outputs.py_modified_files }}
+      - name: Run flake8
+        if: ${{ steps.filter.outputs.py_modified == 'true' }}
+        run: flake8 ${{ steps.filter.outputs.py_modified_files }}
       - name: Run pytest
         run: pytest

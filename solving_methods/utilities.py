@@ -4,7 +4,8 @@ from constants import RIGHT, LEFT, UP, DOWN, FRONT, BACK
 def get_rotations_from_face(face):
     """
     :param face: One of FRONT, BACK, LEFT, RIGHT, UP, DOWN
-    :return: A pair (CW, CC) given the clockwise and counterclockwise rotations for that face
+    :return: A pair (CW, CC) given the clockwise and counterclockwise
+    rotations for that face
     """
     if face == RIGHT:
         return "R", "Ri"
