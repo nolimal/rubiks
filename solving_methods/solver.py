@@ -111,9 +111,9 @@ class Solver:
         # ensure piece is at z = -1
         undo_move = None
         if edge_piece.position.z == 0:
-            pos = Point(edge_piece.position)
-            pos.x = 0  # pick the UP or DOWN face
-            cw, cc = get_rotations_from_face(pos)
+            position = Point(edge_piece.position)
+            position.x = 0  # pick the UP or DOWN face
+            cw, cc = get_rotations_from_face(position)
 
             if edge_piece.position in (LEFT + UP, RIGHT + DOWN):
                 self.move(cw)
@@ -122,9 +122,9 @@ class Solver:
                 self.move(cc)
                 undo_move = cw
         elif edge_piece.position.z == 1:
-            pos = Point(edge_piece.position)
-            pos.z = 0
-            cw, cc = get_rotations_from_face(pos)
+            position = Point(edge_piece.position)
+            position.z = 0
+            cw, cc = get_rotations_from_face(position)
             self.move("{0} {0}".format(cc))
             # don't set the undo move if the piece starts
             # out in the right position
@@ -211,9 +211,9 @@ class Solver:
     ):
         # rotate to z = -1
         if corner_piece.position.z == 1:
-            pos = Point(corner_piece.position)
-            pos.x = pos.z = 0
-            cw, cc = get_rotations_from_face(pos)
+            position = Point(corner_piece.position)
+            position.x = position.z = 0
+            cw, cc = get_rotations_from_face(position)
 
             # be careful not to screw up other pieces on the front face
             count = 0
