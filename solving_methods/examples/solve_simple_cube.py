@@ -1,8 +1,6 @@
 from game.cube import Cube
 from solving_methods.solver import Solver
 
-DEBUG = True
-
 c = Cube("DLURRDFFUBBLDDRBRBLDLRBFRUULFBDDUFBRBBRFUDFLUDLUULFLFR")
 print("Solving cube:\n", c)
 orig = Cube(c)
